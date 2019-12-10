@@ -11,14 +11,31 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
+import it.uniroma1.fillineditor.models.DynamicDoc;
+
 public class MainActivity extends AppCompatActivity {
     private RecyclerView doc_preview_recycler;
     private RecyclerView.Adapter doc_preview_adapter;
     private RecyclerView.LayoutManager doc_preview_layout_manager;
 
+
+    private ArrayList<DynamicDoc> dataset;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dataset = new ArrayList<DynamicDoc>();
+        dataset.add(new DynamicDoc("Ciao"));
+        dataset.add(new DynamicDoc("Sono"));
+        dataset.add(new DynamicDoc("Un"));
+        dataset.add(new DynamicDoc("Recycler"));
+        dataset.add(new DynamicDoc("Ciao"));
+        dataset.add(new DynamicDoc("Ciao"));
+        dataset.add(new DynamicDoc("Ciao"));
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         doc_preview_layout_manager = new LinearLayoutManager(this);
         doc_preview_recycler.setLayoutManager(doc_preview_layout_manager);
 
-        doc_preview_adapter = new DocPreviewAdapter(new String[]{"ciao", "sono", "un", "recycler"});
+//        doc_preview_adapter = new DocPreviewAdapter(new String[]{"ciao", "sono", "un", "recycler"});
+        doc_preview_adapter = new DocPreviewAdapter(dataset);
         doc_preview_recycler.setAdapter(doc_preview_adapter);
     }
 

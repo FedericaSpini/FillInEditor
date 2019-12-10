@@ -1,5 +1,6 @@
 package it.uniroma1.fillineditor;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import it.uniroma1.fillineditor.models.DynamicDoc;
+
 public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.DocPreviewViewHolder> {
 
-    private String[] mDataset;
+    private ArrayList<DynamicDoc> mDataset;
 
-    public DocPreviewAdapter(String[] mDataset) {
+    public DocPreviewAdapter(ArrayList<DynamicDoc> mDataset) {
         this.mDataset = mDataset;
     }
 
@@ -21,9 +26,15 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
     public static class DocPreviewViewHolder extends RecyclerView.ViewHolder{
         protected TextView mTextView;
 
-        public DocPreviewViewHolder(View v){
+        public DocPreviewViewHolder(final View v){
             super(v);
             mTextView = v.findViewById(R.id.card_name_text);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    v.getContext().startActivity(new Intent(v.getContext(), CompileDocActivity.class));
+                }
+            });
         }
     }
 
@@ -39,11 +50,11 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
 
     @Override
     public void onBindViewHolder(@NonNull DocPreviewViewHolder docPreviewViewHolder, int i) {
-        docPreviewViewHolder.mTextView.setText(mDataset[i]);
+        docPreviewViewHolder.mTextView.setText(mDataset.get(i).getName());
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 }
