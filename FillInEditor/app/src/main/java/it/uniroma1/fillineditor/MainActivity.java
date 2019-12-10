@@ -4,12 +4,17 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView doc_preview_recycler;
+    private RecyclerView.Adapter doc_preview_adapter;
+    private RecyclerView.LayoutManager doc_preview_layout_manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        doc_preview_recycler = (RecyclerView)findViewById(R.id.doc_preview_recycler);
+        doc_preview_recycler.setHasFixedSize(true); //opzionale
+
+        doc_preview_layout_manager = new LinearLayoutManager(this);
+        doc_preview_recycler.setLayoutManager(doc_preview_layout_manager);
+
+        doc_preview_adapter = new DocPreviewAdapter(new String[]{"ciao", "sono", "un", "recycler"});
+        doc_preview_recycler.setAdapter(doc_preview_adapter);
     }
 
     @Override
