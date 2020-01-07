@@ -7,12 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
+import it.uniroma1.fillineditor.configuration.Configuration;
+import it.uniroma1.fillineditor.configuration.ConfigurationReader;
+import it.uniroma1.fillineditor.configuration.JSONViewObject;
 import it.uniroma1.fillineditor.models.DynamicDoc;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,10 +25,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ArrayList<DynamicDoc> dataset;
+    private Configuration configuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ConfigurationReader configurationReader = new ConfigurationReader(this);
+        JSONViewObject[] jsonViewObjects = configurationReader.read(getResources());
+        System.out.println("!!!!!!!!!IL JSON E': !!!!!!!!!!!!!!!!!!" + jsonViewObjects);
 
         dataset = new ArrayList<DynamicDoc>();
         dataset.add(new DynamicDoc("Ciao"));
@@ -81,4 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
