@@ -24,13 +24,13 @@ public class JSONResReader {
 
     // === [ Public API ] ======================================================
 
-    /**
-     * Read from a resources file and create a {@link JSONResReader} object that will allow the creation of other
-     * objects from this resource.
-     *
-     * @param resources An application {@link Resources} object.
-     * @param id The id for the resource to load, typically held in the raw/ folder.
-     */
+//    /**
+//     * Read from a resources file and create a {@link JSONResReader} object that will allow the creation of other
+//     * objects from this resource.
+//     *
+//     * @param resources An application {@link Resources} object.
+//     * @param id The id for the resource to load, typically held in the raw/ folder.
+//     */
 //    public JSONResReader(Resources resources, int id) {
 //        InputStream resourceReader = resources.openRawResource(id);
 //        Writer writer = new StringWriter();

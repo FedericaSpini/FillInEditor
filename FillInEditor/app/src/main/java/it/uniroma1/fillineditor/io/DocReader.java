@@ -1,6 +1,6 @@
 package it.uniroma1.fillineditor.io;
 
-
+@Deprecated
 public class DocReader {
 
 //    public static ArrayList<DynamicDoc> readDocs(){

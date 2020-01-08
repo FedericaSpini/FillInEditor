@@ -1,5 +1,5 @@
 package it.uniroma1.fillineditor.io;
-
+@Deprecated
 public class NamesManager {
     private static final String FOLDER_NAME = "FillInEditor";
     private static final String DOC_FOLDER_NAME = "compilableDocs";
