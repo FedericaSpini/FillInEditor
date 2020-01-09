@@ -11,21 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
-
-import it.uniroma1.fillineditor.configuration.Configuration;
 import it.uniroma1.fillineditor.configuration.ConfigurationReader;
 import it.uniroma1.fillineditor.configuration.JSONViewObject;
-import it.uniroma1.fillineditor.models.DynamicDoc;
+import it.uniroma1.fillineditor.models.DynamicDocLibrary;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView doc_preview_recycler;
     private RecyclerView.Adapter doc_preview_adapter;
     private RecyclerView.LayoutManager doc_preview_layout_manager;
 
+    private DynamicDocLibrary dataset;
 
-    private ArrayList<DynamicDoc> dataset;
-    private Configuration configuration;
+//    private ArrayList<DynamicDoc> dataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         ConfigurationReader configurationReader = new ConfigurationReader(this);
         JSONViewObject[] jsonViewObjects = configurationReader.read(getResources());
-        System.out.println("!!!!!!!!!IL JSON E': !!!!!!!!!!!!!!!!!!" + jsonViewObjects);
 
-        dataset = new ArrayList<DynamicDoc>();
-        dataset.add(new DynamicDoc("Ciao"));
-        dataset.add(new DynamicDoc("Sono"));
-        dataset.add(new DynamicDoc("Un"));
-        dataset.add(new DynamicDoc("Recycler"));
-        dataset.add(new DynamicDoc("Ciao"));
-        dataset.add(new DynamicDoc("Ciao"));
-        dataset.add(new DynamicDoc("Ciao"));
+        dataset = new DynamicDocLibrary(jsonViewObjects);
+
+//        dataset = new ArrayList<DynamicDoc>();
+
+
+//        dataset.add(new DynamicDoc("Ciao"));
+//        dataset.add(new DynamicDoc("Sono"));
+//        dataset.add(new DynamicDoc("Un"));
+//        dataset.add(new DynamicDoc("Recycler"));
+//        dataset.add(new DynamicDoc("Ciao"));
+//        dataset.add(new DynamicDoc("Ciao"));
+//        dataset.add(new DynamicDoc("Ciao"));
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

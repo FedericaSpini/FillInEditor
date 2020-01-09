@@ -2,7 +2,6 @@ package it.uniroma1.fillineditor;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +11,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import it.uniroma1.fillineditor.models.DynamicDoc;
+import it.uniroma1.fillineditor.models.DynamicDocLibrary;
 
 public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.DocPreviewViewHolder> {
 
     private ArrayList<DynamicDoc> mDataset;
 
-    public DocPreviewAdapter(ArrayList<DynamicDoc> mDataset) {
-        this.mDataset = mDataset;
+//    public DocPreviewAdapter(ArrayList<DynamicDoc> mDataset) {
+//        this.mDataset = mDataset;
+//    }
+    public DocPreviewAdapter(DynamicDocLibrary mDataset) {
+        this.mDataset = mDataset.getLibrary();
     }
 
 
@@ -50,7 +53,7 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
 
     @Override
     public void onBindViewHolder(@NonNull DocPreviewViewHolder docPreviewViewHolder, int i) {
-        docPreviewViewHolder.mTextView.setText(mDataset.get(i).getName());
+        docPreviewViewHolder.mTextView.setText(mDataset.get(i).getTitle());
     }
 
     @Override
