@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import java.io.InputStream;
+import java.util.Arrays;
 
 import it.uniroma1.fillineditor.io.JSONResReader;
 
@@ -16,22 +17,13 @@ public class ConfigurationReader
     }
 
     public JSONViewObject[] read  (Resources resources){
-        System.out.println("??????????????????????????1");
 
         InputStream ins = context.getResources().openRawResource(
                 context.getResources().getIdentifier("config",
                         "raw", context.getPackageName()));
-        System.out.println("??????????????????????????2"+ins);
-
-//        InputStream XmlFileInputStream = context.getResources().openRawResource(R.raw.config); // getting XML
-//        String sxml = readTextFile(XmlFileInputStream);
-
         JSONResReader reader = new JSONResReader(resources, ins);
-        System.out.println("??????????????????????????3"+reader);
-
         JSONViewObject[] configurationJson = reader.constructUsingGson(JSONViewObject[].class);
-//        System.out.println(Arrays.toString(configurationJson));
-        System.out.println("??????????????????????????4"+configurationJson);
+        System.out.println("??????????????????????????4"+ Arrays.deepToString(configurationJson));
         return configurationJson;
     }
 

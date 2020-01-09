@@ -1,11 +1,11 @@
 [{
   "id": 0,
   "text": "Testo di prova",
-  "fields": []
+  "fields": [[3,4],[8,6]]
   },
   {
     "id": 0,
     "text": "Testo di prova2",
-    "fields": []
+    "fields": [[0,9]]
   }
 ]
