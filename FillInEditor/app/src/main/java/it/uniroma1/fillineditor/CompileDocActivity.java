@@ -7,8 +7,22 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import it.uniroma1.fillineditor.models.DynamicDoc;
+
 public class CompileDocActivity extends AppCompatActivity {
     private TextView mTextMessage;
+    private DynamicDoc doc;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_compile_doc);
+        doc = getIntent().getExtras().getParcelable("doc_to_compile");
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        mTextMessage = findViewById(R.id.static_text);
+        mTextMessage.setText(doc.getStaticText());
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -17,26 +31,17 @@ public class CompileDocActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+//                    mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+//                    mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+//                    mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compile_doc);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
 
 }

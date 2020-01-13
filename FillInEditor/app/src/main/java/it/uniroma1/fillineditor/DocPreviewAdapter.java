@@ -17,9 +17,6 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
 
     private ArrayList<DynamicDoc> mDataset;
 
-//    public DocPreviewAdapter(ArrayList<DynamicDoc> mDataset) {
-//        this.mDataset = mDataset;
-//    }
     public DocPreviewAdapter(DynamicDocLibrary mDataset) {
         this.mDataset = mDataset.getLibrary();
     }
@@ -28,6 +25,7 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
 
     public static class DocPreviewViewHolder extends RecyclerView.ViewHolder{
         protected TextView mTextView;
+        protected DynamicDoc dynamicDoc;
 
         public DocPreviewViewHolder(final View v){
             super(v);
@@ -35,7 +33,9 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    v.getContext().startActivity(new Intent(v.getContext(), CompileDocActivity.class));
+                    Intent intent = new Intent(v.getContext(), CompileDocActivity.class);
+                    intent.putExtra("doc_to_compile", dynamicDoc);
+                    v.getContext().startActivity(intent);
                 }
             });
         }
@@ -54,6 +54,7 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
     @Override
     public void onBindViewHolder(@NonNull DocPreviewViewHolder docPreviewViewHolder, int i) {
         docPreviewViewHolder.mTextView.setText(mDataset.get(i).getTitle());
+        docPreviewViewHolder.dynamicDoc = mDataset.get(i);
     }
 
     @Override
