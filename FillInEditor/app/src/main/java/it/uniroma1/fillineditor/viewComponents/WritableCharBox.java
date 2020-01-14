@@ -27,7 +27,7 @@ import it.uniroma1.fillineditor.util.Chronometer;
 /**
  * TODO: document your custom view class.
  */
-public class CharBox extends View {
+public class WritableCharBox extends View {
     // Acquisition
     public static final float TOUCH_TOLERANCE = 0;
     public static final float SAMPLING_RATE = 5;
@@ -85,12 +85,12 @@ public class CharBox extends View {
     boolean is_only_down = false;
 
 
-    public CharBox(Context context) {
+    public WritableCharBox(Context context) {
         super(context);
 //        init(null, 0);
     }
 
-    public CharBox(Context context, AttributeSet attrs) {
+    public WritableCharBox(Context context, AttributeSet attrs) {
         super(context, attrs);
         privateBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
@@ -169,7 +169,7 @@ public class CharBox extends View {
 //        guideLines.setStrokeWidth(1);
     }
 
-    public CharBox(Context context, AttributeSet attrs, int defStyle) {
+    public WritableCharBox(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 //        init(attrs, defStyle);
     }
