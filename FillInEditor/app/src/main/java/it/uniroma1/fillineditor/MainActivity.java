@@ -1,16 +1,20 @@
 package it.uniroma1.fillineditor;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.configuration.ConfigurationReader;
 import it.uniroma1.fillineditor.configuration.JSONViewObject;
 import it.uniroma1.fillineditor.models.DynamicDocLibrary;
+
+//import android.support.v7.widget.LinearLayoutManager;
+//import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView doc_preview_recycler;
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
-
+//
         doc_preview_recycler = (RecyclerView)findViewById(R.id.doc_preview_recycler);
         doc_preview_recycler.setHasFixedSize(true); //opzionale
 
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

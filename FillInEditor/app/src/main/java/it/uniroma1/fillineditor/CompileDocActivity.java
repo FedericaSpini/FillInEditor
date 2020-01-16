@@ -1,13 +1,19 @@
 package it.uniroma1.fillineditor;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import it.uniroma1.fillineditor.models.DynamicDoc;
+
+//import android.support.annotation.NonNull;
+
+//import android.support.v7.widget.RecyclerView;
 
 public class CompileDocActivity extends AppCompatActivity {
     private TextView mTextMessage;
@@ -22,6 +28,16 @@ public class CompileDocActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.static_text);
         mTextMessage.setText(doc.getStaticText());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.doc_preview_recycler);
+//        recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+//
+//
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//
+//        AdapterDoc myAdapter = new AdapterDoc(this, new DynamicDocContent[]{new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent()});
+//        recyclerView.setAdapter(myAdapter);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
