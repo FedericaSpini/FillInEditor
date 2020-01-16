@@ -6,10 +6,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniroma1.fillineditor.models.DynamicDoc;
+import it.uniroma1.fillineditor.models.DynamicDocContent;
 
 //import android.support.annotation.NonNull;
 
@@ -29,15 +33,15 @@ public class CompileDocActivity extends AppCompatActivity {
         mTextMessage.setText(doc.getStaticText());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.doc_preview_recycler);
-//        recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-//
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//
-//        AdapterDoc myAdapter = new AdapterDoc(this, new DynamicDocContent[]{new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent()});
-//        recyclerView.setAdapter(myAdapter);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.doc_preview_recycler);
+        recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        AdapterDoc myAdapter = new AdapterDoc(this, new DynamicDocContent[]{new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent(),new DynamicDocContent()});
+        recyclerView.setAdapter(myAdapter);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

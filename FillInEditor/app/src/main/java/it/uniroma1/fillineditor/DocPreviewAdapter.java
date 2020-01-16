@@ -30,7 +30,7 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
 
         public DocPreviewViewHolder(final View v){
             super(v);
-            mTextView = v.findViewById(R.id.card_name_text);
+            mTextView = (TextView) v.findViewById(R.id.card_name_text);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -48,8 +48,7 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
         View v = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.card_doc_preview, viewGroup, false);
-        DocPreviewViewHolder vh = new DocPreviewViewHolder(v);
-        return vh;
+        return new DocPreviewViewHolder(v);
     }
 
     @Override
