@@ -19,6 +19,8 @@ import it.uniroma1.fillineditor.models.DynamicDocContent;
 
 //import android.support.v7.widget.RecyclerView;
 
+//TODO: Parti dal cambiare l'adapter perché deve gestire in modo differente i due diversi tipi di componenti
+
 public class CompileDocActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private DynamicDoc doc;
@@ -30,7 +32,7 @@ public class CompileDocActivity extends AppCompatActivity {
         doc = getIntent().getExtras().getParcelable("doc_to_compile");
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.static_text);
-        mTextMessage.setText(doc.getStaticText());
+        mTextMessage.setText(doc.getTitle());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.doc_preview_recycler);

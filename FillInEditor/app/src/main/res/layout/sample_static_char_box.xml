@@ -4,4 +4,12 @@
     android:layout_width="50dp"
     android:layout_height="70dp"
     android:background="@drawable/char_box_countour">
+    <TextView
+        android:id="@+id/static_text"
+        android:text="YO"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_centerVertical="true"/>
 </it.uniroma1.fillineditor.viewComponents.StaticCharBox>

@@ -2,7 +2,7 @@ package it.uniroma1.fillineditor.models;
 
 import java.util.ArrayList;
 
-class DynamicText {
+class DynamicText implements DynamicDocContent{
     private int index;
     private int lenght;
     private ArrayList<Character> characterList;
@@ -24,4 +24,6 @@ class DynamicText {
 
     public void setCharacterList(ArrayList<Character> characterList) {this.characterList = characterList;}
 
+    @Override
+    public int getViewType() {return 1;}
 }
