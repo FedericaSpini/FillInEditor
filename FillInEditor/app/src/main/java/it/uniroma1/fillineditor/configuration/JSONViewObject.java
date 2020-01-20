@@ -4,15 +4,6 @@ import java.util.ArrayList;
 
 public class JSONViewObject {
     private int id;
-
-    public String getTitle() {return title;}
-
-    public void setTitle(String title) {this.title = title;}
-
-    public ArrayList<ArrayList<Integer>> getFields() {return fields;}
-
-    public void setFields(ArrayList<ArrayList<Integer>> fields) {this.fields = fields;}
-
     private String title;
     private String text;
     private ArrayList<ArrayList<Integer>> fields;
@@ -29,5 +20,12 @@ public class JSONViewObject {
     public String toString(){
         return "\n\n"+ "Documento: "+title+ " # "+id+"\n"+"Testo: "+text+"\n"+"campi: "+fields+"\n";
     }
+    public String getTitle() {return title;}
+
+    public void setTitle(String title) {this.title = title;}
+
+    public ArrayList<ArrayList<Integer>> getFields() {return fields;}
+
+    public void setFields(ArrayList<ArrayList<Integer>> fields) {this.fields = fields;}
 
 }

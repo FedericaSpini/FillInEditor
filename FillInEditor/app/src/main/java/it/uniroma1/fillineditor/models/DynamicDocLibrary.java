@@ -8,6 +8,7 @@ public class DynamicDocLibrary {
     ArrayList<DynamicDoc> library;
 
     public DynamicDocLibrary(JSONViewObject[] jsonDocList) {
+        System.out.println("CREAZIONE DELLA LIBRERIA DI DOCUMENTI IN CORSO...");
         this.library = new ArrayList<DynamicDoc>();
         for (int i = 0; i < jsonDocList.length; i++) {
 
@@ -15,6 +16,7 @@ public class DynamicDocLibrary {
             JSONViewObject doc = jsonDocList[i];
             library.add(new DynamicDoc(doc));
         }
+        System.out.println("LA LIBRERIA DEI DOCUMENTI E' STATA CREATA");
     }
     public ArrayList<DynamicDoc> getLibrary() {return library;}
 
