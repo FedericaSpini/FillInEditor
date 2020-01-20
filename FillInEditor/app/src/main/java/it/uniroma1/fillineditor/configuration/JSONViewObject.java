@@ -7,7 +7,7 @@ public class JSONViewObject {
     private String title;
     private String text;
     private ArrayList<ArrayList<Integer>> fields;
-
+//    private String fields;
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
@@ -28,4 +28,7 @@ public class JSONViewObject {
 
     public void setFields(ArrayList<ArrayList<Integer>> fields) {this.fields = fields;}
 
+//    public String getFields() {return fields;}
+//
+//    public void setFields(String fields) {this.fields = fields;}
 }
