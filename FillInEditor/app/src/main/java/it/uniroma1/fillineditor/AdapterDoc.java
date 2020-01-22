@@ -9,42 +9,60 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.models.DynamicDocContent;
 
-class AdapterDoc extends RecyclerView.Adapter<AdapterDoc.DocViewHolder> {
-    /**
-     * Thi class fill with several cards (e.g. characteristics, life point, an so on)
-     * the character sheet sections.
-     */
-
+class AdapterDoc extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private DynamicDocContent[] dataset;
     private Context context;
+
     public AdapterDoc(Context context, DynamicDocContent[] config){
         this.context=context;
         this.dataset = config;
     }
 
 
-    public class DocViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolderStaticText extends RecyclerView.ViewHolder {
         protected TextView text;
-//        protected RecyclerView componentRecycler;
 
-        public DocViewHolder(TextView v) {
+        public ViewHolderStaticText(TextView v) {
             super(v);
             text = v;
-//            text = (TextView) v.findViewById(R.id.generic_card_title);
-//            componentRecycler = (RecyclerView) v.findViewById(R.id.generic_card_content_recycler);
+        }
+    }
+
+    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
+        protected TextView text;
+
+        public ViewHolderDynamicText(TextView v) {
+            super(v);
+            text = v;
         }
     }
 
     @NonNull
     @Override
-    public DocViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView v = new TextView(context);
-        return new DocViewHolder(v);
+    public ViewHolderStaticText onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType){
+            case 0:
+                TextView v = new TextView(context);
+                return new ViewHolderStaticText(v);
+            case 1:
+                TextView v2 = new TextView(context);
+                return new ViewHolderStaticText(v2);
+        }
+        throw new RuntimeException("ATTENZIONE! NUMERO DI COMPONENTE NON VALIDO");
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DocViewHolder holder, int position) {
-        holder.text.setText("Testo numero "+position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()){
+            case 0:
+                ViewHolderStaticText holderStaticText = (ViewHolderStaticText) holder;
+                holderStaticText.text.setText("Testo numero "+position);
+                break;
+            case 1:
+                ViewHolderDynamicText holderDynamicText = (ViewHolderDynamicText) holder;
+                holderDynamicText.text.setText("Testo numero "+position);
+                break;
+        }
 //        PaperCardStructure structure = dataset[position];
 //        holder.card_title.setText(structure.getTitle());
 //        CardComponentRepresentation[] contents = new CardComponentRepresentation[structure.getComponentRepresentations().size()];

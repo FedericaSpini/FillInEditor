@@ -29,9 +29,6 @@ public class CompileDocActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compile_doc);
         doc = getIntent().getExtras().getParcelable("doc_to_compile");
 
-        System.out.println("1-----###########################"+doc);
-        System.out.println("2-----###########################"+doc.getContents());
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.static_text);
         mTextMessage.setText(doc.getTitle());
@@ -45,7 +42,6 @@ public class CompileDocActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         try {
             DynamicDocContent[] contents = doc.getContents();
-            System.out.println("###########################"+contents);
             AdapterDoc myAdapter = new AdapterDoc(this,contents);
             recyclerView.setAdapter(myAdapter);
         }
