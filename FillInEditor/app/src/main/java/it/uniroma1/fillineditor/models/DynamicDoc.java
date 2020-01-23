@@ -95,22 +95,22 @@ public class DynamicDoc implements Parcelable {
 
         if (dynamicFields.get(0).getIndex() == 0) {
             c.add(dynamicFields.get(0));
-            stringC.add(dynamicFields.get(0).getDescription());
+            stringC.add("1"+dynamicFields.get(0).getDescription());
             dynamicFields.remove(0);
         }
         int index_start = 0;
         for (DynamicText dynT : dynamicFields) {
             StaticText staticText = new StaticText(this.staticText.substring(index_start, dynT.getIndex()));
             c.add(staticText);
-            stringC.add(staticText.getText());
+            stringC.add("0"+staticText.getText());
             index_start = dynT.getIndex();
             c.add(dynT);
-            stringC.add(dynT.getDescription());
+            stringC.add("1"+dynT.getDescription());
         }
         if (index_start < this.staticText.length()) {
             StaticText finalText = new StaticText(this.staticText.substring(index_start));
             c.add(finalText);
-            stringC.add(finalText.getText());
+            stringC.add("0"+finalText.getText());
         }
         this.contents = c.toArray(new DynamicDocContent[c.size()]);
         this.stringContents = stringC.toArray(new String[stringC.size()]);
