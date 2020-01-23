@@ -7,17 +7,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import it.uniroma1.fillineditor.models.DynamicDocContent;
+import it.uniroma1.fillineditor.models.DocContentManager;
+import it.uniroma1.fillineditor.models.StaticText;
 
 class AdapterDoc extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private DynamicDocContent[] dataset;
+//    private DynamicDocContent[] dataset;
     private Context context;
+    private String[] dataset;
 
-    public AdapterDoc(Context context, DynamicDocContent[] config){
-        this.context=context;
-        this.dataset = config;
-    }
 
+//    public AdapterDoc(Context context, DynamicDocContent[] config){
+//        this.context=context;
+//        this.dataset = config;
+//    }
+public AdapterDoc(Context context, String[] config){
+    this.context=context;
+    this.dataset = config;
+}
 
     public class ViewHolderStaticText extends RecyclerView.ViewHolder {
         protected TextView text;
@@ -55,22 +61,15 @@ class AdapterDoc extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()){
             case 0:
+                StaticText t = (StaticText) DocContentManager.getInstance().generateDocComponent(0, dataset[position]);
                 ViewHolderStaticText holderStaticText = (ViewHolderStaticText) holder;
-                holderStaticText.text.setText("Testo numero "+position);
+                holderStaticText.text.setText(t.getText());
                 break;
             case 1:
                 ViewHolderDynamicText holderDynamicText = (ViewHolderDynamicText) holder;
                 holderDynamicText.text.setText("Testo numero "+position);
                 break;
         }
-//        PaperCardStructure structure = dataset[position];
-//        holder.card_title.setText(structure.getTitle());
-//        CardComponentRepresentation[] contents = new CardComponentRepresentation[structure.getComponentRepresentations().size()];
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-//        holder.componentRecycler.setLayoutManager(linearLayoutManager);
-//        AdapterGenericCardContent myAdapter = new AdapterGenericCardContent(context, structure.getComponentRepresentations().toArray(contents));
-//        holder.componentRecycler.setAdapter(myAdapter);
     }
 
 

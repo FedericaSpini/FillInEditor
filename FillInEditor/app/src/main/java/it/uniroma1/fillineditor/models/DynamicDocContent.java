@@ -5,5 +5,4 @@ public interface DynamicDocContent {
     public static int DYNAMIC_TEXT_ID = 1;
 
     public int getViewType();
-
 }

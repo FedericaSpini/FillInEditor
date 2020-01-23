@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniroma1.fillineditor.models.DynamicDoc;
-import it.uniroma1.fillineditor.models.DynamicDocContent;
 
 
 
@@ -41,7 +40,8 @@ public class CompileDocActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         try {
-            DynamicDocContent[] contents = doc.getContents();
+//            DynamicDocContent[] contents = doc.getContents();
+            String[] contents = doc.getStringContents();
             AdapterDoc myAdapter = new AdapterDoc(this,contents);
             recyclerView.setAdapter(myAdapter);
         }

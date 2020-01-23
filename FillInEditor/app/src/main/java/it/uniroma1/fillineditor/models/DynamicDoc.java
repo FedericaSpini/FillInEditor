@@ -17,6 +17,7 @@ public class DynamicDoc implements Parcelable {
     private String encodedCompilableText;
 
     private DynamicDocContent[] contents;
+    private String[] stringContents;
 
     public DynamicDoc(JSONViewObject doc){
         this.title = doc.getTitle();
@@ -85,24 +86,34 @@ public class DynamicDoc implements Parcelable {
     public void setContentsFromJson(){
 //        ArrayList<ArrayList<Integer>>
         ArrayList<DynamicDocContent> c = new ArrayList<DynamicDocContent>();
+        ArrayList<String> stringC = new ArrayList<String>();
+
         ArrayList<DynamicText> dynamicFields = new ArrayList<DynamicText>();
         for (ArrayList<Integer> indexLength : this.JSONCompilableText) {
             dynamicFields.add(new DynamicText(indexLength.get(0), indexLength.get(1)));
         }
+
         if (dynamicFields.get(0).getIndex() == 0) {
             c.add(dynamicFields.get(0));
+            stringC.add(dynamicFields.get(0).getDescription());
             dynamicFields.remove(0);
         }
         int index_start = 0;
         for (DynamicText dynT : dynamicFields) {
-            c.add(new StaticText(this.staticText.substring(index_start, dynT.getIndex())));
+            StaticText staticText = new StaticText(this.staticText.substring(index_start, dynT.getIndex()));
+            c.add(staticText);
+            stringC.add(staticText.getText());
             index_start = dynT.getIndex();
             c.add(dynT);
+            stringC.add(dynT.getDescription());
         }
         if (index_start < this.staticText.length()) {
-            c.add(new StaticText(this.staticText.substring(index_start)));
+            StaticText finalText = new StaticText(this.staticText.substring(index_start));
+            c.add(finalText);
+            stringC.add(finalText.getText());
         }
         this.contents = c.toArray(new DynamicDocContent[c.size()]);
+        this.stringContents = stringC.toArray(new String[stringC.size()]);
     }
 
     public String getTitle() {return title;}
@@ -130,4 +141,9 @@ public class DynamicDoc implements Parcelable {
     public String getEncodedCompilableText() {return encodedCompilableText;}
 
     public void setEncodedCompilableText(String encodedCompilableText) {this.encodedCompilableText = encodedCompilableText;}
+
+    public String[] getStringContents() {return stringContents;}
+
+    public void setStringContents(String[] stringContents) {this.stringContents = stringContents;}
+
 }

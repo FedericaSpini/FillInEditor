@@ -5,11 +5,13 @@ import java.util.ArrayList;
 class DynamicText implements DynamicDocContent{
     private int index;
     private int lenght;
+    private String description;
     private ArrayList<Character> characterList;
 
     public DynamicText(int index, int lenght) {
         this.index=index;
         this.lenght=lenght;
+        this.description = index+" "+lenght;
     }
 
     public int getIndex() {return index;}
@@ -26,4 +28,8 @@ class DynamicText implements DynamicDocContent{
 
     @Override
     public int getViewType() {return 1;}
+
+    public String getDescription() {return description;}
+
+    public void setDescription(String description) {this.description = description;}
 }
