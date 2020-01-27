@@ -13,7 +13,7 @@ import java.io.File;
 import it.uniroma1.fillineditor.data.ItemData;
 import it.uniroma1.fillineditor.data.SessionData;
 import it.uniroma1.fillineditor.data.ToastManager;
-import it.uniroma1.fillineditor.viewComponents.WritableCharBox;
+import it.uniroma1.fillineditor.viewComponents.WritableCharBoxView;
 
 public class DrawingActivity extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class DrawingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_drawing);
 
-        WritableCharBox drawingView = findViewById(R.id.drawing_view_id);
+        WritableCharBoxView drawingView = findViewById(R.id.drawing_view_id);
         drawingView.setActivity(this);
 
 
@@ -80,7 +80,7 @@ public class DrawingActivity extends AppCompatActivity {
 
     public void clear(View view) {
 
-        WritableCharBox drawView = (WritableCharBox) findViewById(R.id.drawing_view_id);
+        WritableCharBoxView drawView = (WritableCharBoxView) findViewById(R.id.drawing_view_id);
         drawView.restart();
     }
 
@@ -91,7 +91,7 @@ public class DrawingActivity extends AppCompatActivity {
     public synchronized void next(View view) {
         view.setEnabled(false);
 
-        WritableCharBox drawView = (WritableCharBox) findViewById(R.id.drawing_view_id);
+        WritableCharBoxView drawView = (WritableCharBoxView) findViewById(R.id.drawing_view_id);
         final ItemData data = drawView.getItemData();
 
         if (data.touch_up_points.isEmpty()) {
@@ -138,7 +138,7 @@ public class DrawingActivity extends AppCompatActivity {
     }
 
     public void samples(View view) {
-        WritableCharBox drawView = (WritableCharBox) findViewById(R.id.drawing_view_id);
+        WritableCharBoxView drawView = (WritableCharBoxView) findViewById(R.id.drawing_view_id);
         drawView.drawExtractSampling(drawView.extractSampling());
     }
 

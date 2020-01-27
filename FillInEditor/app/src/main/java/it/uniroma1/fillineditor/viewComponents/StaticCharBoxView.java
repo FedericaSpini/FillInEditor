@@ -8,20 +8,20 @@ import android.widget.TextView;
 /**
  * TODO: document your custom view class.
  */
-public class StaticCharBox extends RelativeLayout implements DynamicDocViewComponents {
+public class StaticCharBoxView extends RelativeLayout implements DynamicDocViewComponents {
 
     private TextView textView;
 
 
-    public StaticCharBox(Context context) {
+    public StaticCharBoxView(Context context) {
         super(context);
     }
 
-    public StaticCharBox(Context context, AttributeSet attrs) {
+    public StaticCharBoxView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public StaticCharBox(Context context, AttributeSet attrs, int defStyle) {
+    public StaticCharBoxView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
@@ -36,5 +36,9 @@ public class StaticCharBox extends RelativeLayout implements DynamicDocViewCompo
 
     public void setText(String s){
         this.textView.setText(s);
+    }
+
+    @Override
+    public void setContents(String s) {
     }
 }

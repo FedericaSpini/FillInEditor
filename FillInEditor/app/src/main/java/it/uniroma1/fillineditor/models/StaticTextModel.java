@@ -1,12 +1,15 @@
 package it.uniroma1.fillineditor.models;
 
-public class StaticText implements DynamicDocContent {
+public class StaticTextModel implements DynamicDocContentModel {
     private String text;
 
-    public StaticText(){this.text = "";}
-    public StaticText(String s){this.text=s;}
+    public StaticTextModel(){this.text = "";}
+
+    public StaticTextModel(String s){this.text=s;}
+
     @Override
     public int getViewType() {return 0;}
+
     public String getText() {return text;}
 
     public void setText(String text) {this.text = text;}

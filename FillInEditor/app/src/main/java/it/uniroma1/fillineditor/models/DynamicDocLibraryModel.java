@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 import it.uniroma1.fillineditor.configuration.JSONViewObject;
 
-public class DynamicDocLibrary {
-    ArrayList<DynamicDoc> library;
+public class DynamicDocLibraryModel {
+    ArrayList<DynamicDocModel> library;
 
-    public DynamicDocLibrary(JSONViewObject[] jsonDocList) {
+    public DynamicDocLibraryModel(JSONViewObject[] jsonDocList) {
         System.out.println("CREAZIONE DELLA LIBRERIA DI DOCUMENTI IN CORSO...");
-        this.library = new ArrayList<DynamicDoc>();
+        this.library = new ArrayList<DynamicDocModel>();
         for (int i = 0; i < jsonDocList.length; i++) {
 
             // accessing each element of array
             JSONViewObject doc = jsonDocList[i];
-            library.add(new DynamicDoc(doc));
+            library.add(new DynamicDocModel(doc));
         }
         System.out.println("LA LIBRERIA DEI DOCUMENTI E' STATA CREATA");
     }
-    public ArrayList<DynamicDoc> getLibrary() {return library;}
+    public ArrayList<DynamicDocModel> getLibrary() {return library;}
 
-    public void setLibrary(ArrayList<DynamicDoc> library) {this.library = library;}
+    public void setLibrary(ArrayList<DynamicDocModel> library) {this.library = library;}
 }

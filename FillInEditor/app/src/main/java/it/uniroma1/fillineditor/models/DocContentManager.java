@@ -22,7 +22,7 @@ public class DocContentManager {
         return docContentManagerInstance;
     }
 
-    public DynamicDocContent generateDocComponent(int componentTypeId, String description){
+    public DynamicDocContentModel generateDocComponent(int componentTypeId, String description){
         setComponentTypeId(componentTypeId);
         setDescription(description);
         switch (this.componentTypeId){
@@ -34,14 +34,14 @@ public class DocContentManager {
         throw new RuntimeException("ATTENZIONE! NUMERO DI COMPONENTE NON VALIDO");
     }
 
-    public StaticText defineStaticText(){
-        return new StaticText(this.description);
+    public StaticTextModel defineStaticText(){
+        return new StaticTextModel(this.description);
     }
 
-    public DynamicText defineDynamicText(){
+    public DynamicTextModel defineDynamicText(){
         List<String> values = Arrays.asList(description.split(" "));
         ArrayList<Integer> intList = new ArrayList<Integer>();
-        return new DynamicText(intList.get(0), intList.get(1));
+        return new DynamicTextModel(intList.get(0), intList.get(1));
     }
 
     public int getComponentTypeId() {return componentTypeId;}

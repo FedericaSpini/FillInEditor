@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.configuration.ConfigurationReader;
 import it.uniroma1.fillineditor.configuration.JSONViewObject;
-import it.uniroma1.fillineditor.models.DynamicDocLibrary;
+import it.uniroma1.fillineditor.models.DynamicDocLibraryModel;
 
 //import android.support.v7.widget.LinearLayoutManager;
 //import android.support.v7.widget.Toolbar;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter doc_preview_adapter;
     private RecyclerView.LayoutManager doc_preview_layout_manager;
 
-    private DynamicDocLibrary dataset;
+    private DynamicDocLibraryModel dataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ConfigurationReader configurationReader = new ConfigurationReader(this);
         JSONViewObject[] jsonViewObjects = configurationReader.read(getResources());
 
-        dataset = new DynamicDocLibrary(jsonViewObjects);
+        dataset = new DynamicDocLibraryModel(jsonViewObjects);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -9,17 +9,17 @@ import java.util.List;
 
 import it.uniroma1.fillineditor.configuration.JSONViewObject;
 
-public class DynamicDoc implements Parcelable {
+public class DynamicDocModel implements Parcelable {
     private String title;
     private int id;
     private String staticText;
     private ArrayList<ArrayList<Integer>> JSONCompilableText;
     private String encodedCompilableText;
 
-    private DynamicDocContent[] contents;
+    private DynamicDocContentModel[] contents;
     private String[] stringContents;
 
-    public DynamicDoc(JSONViewObject doc){
+    public DynamicDocModel(JSONViewObject doc){
         this.title = doc.getTitle();
         this.id = doc.getId();
         this.staticText = doc.getText();
@@ -48,7 +48,7 @@ public class DynamicDoc implements Parcelable {
         return decodedFields;
     }
 
-    protected DynamicDoc(Parcel in) {
+    protected DynamicDocModel(Parcel in) {
         this.title = in.readString();
         this.id = in.readInt();
         this.staticText=in.readString();
@@ -57,18 +57,18 @@ public class DynamicDoc implements Parcelable {
         setContentsFromJson();
 
 
-//        this.contents = (DynamicDocContent[]) in.readArray(getClass().getClassLoader());
+//        this.contents = (DynamicDocContentModel[]) in.readArray(getClass().getClassLoader());
     }
 
-    public static final Creator<DynamicDoc> CREATOR = new Creator<DynamicDoc>() {
+    public static final Creator<DynamicDocModel> CREATOR = new Creator<DynamicDocModel>() {
         @Override
-        public DynamicDoc createFromParcel(Parcel in) {
-            return new DynamicDoc(in);
+        public DynamicDocModel createFromParcel(Parcel in) {
+            return new DynamicDocModel(in);
         }
 
         @Override
-        public DynamicDoc[] newArray(int size) {
-            return new DynamicDoc[size];
+        public DynamicDocModel[] newArray(int size) {
+            return new DynamicDocModel[size];
         }
     };
 
@@ -85,34 +85,34 @@ public class DynamicDoc implements Parcelable {
 
     public void setContentsFromJson(){
 //        ArrayList<ArrayList<Integer>>
-        ArrayList<DynamicDocContent> c = new ArrayList<DynamicDocContent>();
+        ArrayList<DynamicDocContentModel> c = new ArrayList<DynamicDocContentModel>();
         ArrayList<String> stringC = new ArrayList<String>();
 
-        ArrayList<DynamicText> dynamicFields = new ArrayList<DynamicText>();
+        ArrayList<DynamicTextModel> dynamicFields = new ArrayList<DynamicTextModel>();
         for (ArrayList<Integer> indexLength : this.JSONCompilableText) {
-            dynamicFields.add(new DynamicText(indexLength.get(0), indexLength.get(1)));
+            dynamicFields.add(new DynamicTextModel(indexLength.get(0), indexLength.get(1)));
         }
 
         if (dynamicFields.get(0).getIndex() == 0) {
             c.add(dynamicFields.get(0));
-            stringC.add("1"+dynamicFields.get(0).getDescription());
+            stringC.add("2"+dynamicFields.get(0).getDescription());
             dynamicFields.remove(0);
         }
         int index_start = 0;
-        for (DynamicText dynT : dynamicFields) {
-            StaticText staticText = new StaticText(this.staticText.substring(index_start, dynT.getIndex()));
+        for (DynamicTextModel dynT : dynamicFields) {
+            StaticTextModel staticText = new StaticTextModel(this.staticText.substring(index_start, dynT.getIndex()));
             c.add(staticText);
             stringC.add("0"+staticText.getText());
             index_start = dynT.getIndex();
             c.add(dynT);
-            stringC.add("1"+dynT.getDescription());
+            stringC.add("2"+dynT.getDescription());
         }
         if (index_start < this.staticText.length()) {
-            StaticText finalText = new StaticText(this.staticText.substring(index_start));
+            StaticTextModel finalText = new StaticTextModel(this.staticText.substring(index_start));
             c.add(finalText);
             stringC.add("0"+finalText.getText());
         }
-        this.contents = c.toArray(new DynamicDocContent[c.size()]);
+        this.contents = c.toArray(new DynamicDocContentModel[c.size()]);
         this.stringContents = stringC.toArray(new String[stringC.size()]);
     }
 
@@ -120,15 +120,15 @@ public class DynamicDoc implements Parcelable {
 
     public void setTitle(String title) {this.title = title;}
 
-    public DynamicDoc(String name) {this.title = name;}
+    public DynamicDocModel(String name) {this.title = name;}
 
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
 
-    public DynamicDocContent[] getContents() {return contents;}
+    public DynamicDocContentModel[] getContents() {return contents;}
 
-    public void setContents(DynamicDocContent[] contents) {this.contents = contents;}
+    public void setContents(DynamicDocContentModel[] contents) {this.contents = contents;}
 
     public String getStaticText() {return staticText;}
 

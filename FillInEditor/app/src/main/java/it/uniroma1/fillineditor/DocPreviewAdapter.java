@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import it.uniroma1.fillineditor.models.DynamicDoc;
-import it.uniroma1.fillineditor.models.DynamicDocLibrary;
+import it.uniroma1.fillineditor.models.DynamicDocModel;
+import it.uniroma1.fillineditor.models.DynamicDocLibraryModel;
 
 public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.DocPreviewViewHolder> {
 
-    private ArrayList<DynamicDoc> mDataset;
+    private ArrayList<DynamicDocModel> mDataset;
 
-    public DocPreviewAdapter(DynamicDocLibrary mDataset) {
+    public DocPreviewAdapter(DynamicDocLibraryModel mDataset) {
         this.mDataset = mDataset.getLibrary();
     }
 
@@ -26,7 +26,7 @@ public class DocPreviewAdapter extends RecyclerView.Adapter<DocPreviewAdapter.Do
 
     public static class DocPreviewViewHolder extends RecyclerView.ViewHolder{
         protected TextView mTextView;
-        protected DynamicDoc dynamicDoc;
+        protected DynamicDocModel dynamicDoc;
 
         public DocPreviewViewHolder(final View v){
             super(v);

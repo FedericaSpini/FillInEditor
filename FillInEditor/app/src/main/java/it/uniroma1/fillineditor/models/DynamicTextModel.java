@@ -2,13 +2,13 @@ package it.uniroma1.fillineditor.models;
 
 import java.util.ArrayList;
 
-class DynamicText implements DynamicDocContent{
+class DynamicTextModel implements DynamicDocContentModel {
     private int index;
     private int lenght;
     private String description;
     private ArrayList<Character> characterList;
 
-    public DynamicText(int index, int lenght) {
+    public DynamicTextModel(int index, int lenght) {
         this.index=index;
         this.lenght=lenght;
         this.description = index+" "+lenght;
