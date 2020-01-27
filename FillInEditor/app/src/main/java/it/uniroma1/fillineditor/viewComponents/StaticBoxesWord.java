@@ -54,7 +54,7 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
             length = Integer.parseInt(indexLength[1]);
 
             this.boxesRecycler = (RecyclerView)findViewById(R.id.boxes_recycler);
-            this.boxesRecyclerLayoutManager = new LinearLayoutManager(getContext());
+            this.boxesRecyclerLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             this.boxesRecycler.setLayoutManager(this.boxesRecyclerLayoutManager);
 
             this.boxesRecyclerAdapter = new StaticBoxesWordAdapter(length);
