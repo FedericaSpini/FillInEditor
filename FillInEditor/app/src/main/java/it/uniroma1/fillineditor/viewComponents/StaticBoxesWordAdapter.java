@@ -36,7 +36,7 @@ public class StaticBoxesWordAdapter extends RecyclerView.Adapter<StaticBoxesWord
 
     @Override
     public void onBindViewHolder(@NonNull StaticBoxViewHolder holder, int position) {
-
+//        holder.box.set
     }
 
     @Override

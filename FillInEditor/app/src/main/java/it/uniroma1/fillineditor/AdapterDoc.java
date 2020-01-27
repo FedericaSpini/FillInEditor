@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.viewComponents.CustomStaticTextView;
 import it.uniroma1.fillineditor.viewComponents.StaticBoxesWord;
-import it.uniroma1.fillineditor.viewComponents.StaticCharBoxView;
 
 import static it.uniroma1.fillineditor.viewComponents.DynamicDocViewComponents.STATIC_BOXES_WORD_ID;
 import static it.uniroma1.fillineditor.viewComponents.DynamicDocViewComponents.STATIC_TEXT_ID;
@@ -34,14 +33,14 @@ public AdapterDoc(Context context, String[] config){
         }
     }
 
-    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
-        protected StaticCharBoxView charBox;
-
-        public ViewHolderDynamicText(StaticCharBoxView v) {
-            super(v);
-            charBox = v;
-        }
-    }
+//    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
+//        protected StaticCharBoxView charBox;
+//
+//        public ViewHolderDynamicText(StaticCharBoxView v) {
+//            super(v);
+//            charBox = v;
+//        }
+//    }
 
     public class ViewHolderStaticBoxesWord extends RecyclerView.ViewHolder{
         StaticBoxesWord word;
@@ -58,13 +57,7 @@ public AdapterDoc(Context context, String[] config){
             case STATIC_TEXT_ID:
                 CustomStaticTextView v = (CustomStaticTextView) LayoutInflater.from(parent.getContext()).
                         inflate(R.layout.sample_static_text, parent, false);
-
                 return new ViewHolderStaticText(v);
-//            case DYNAMIC_TEXT_ID:
-//                StaticCharBoxView v2 = (StaticCharBoxView) LayoutInflater.from(parent.getContext()).
-//                        inflate(R.layout.sample_static_char_box, parent, false);
-//
-//                return new ViewHolderDynamicText(v2);
             case STATIC_BOXES_WORD_ID:
                 StaticBoxesWord staticBoxesWord = (StaticBoxesWord) LayoutInflater.from(parent.getContext()).
                         inflate(R.layout.sample_static_boxes_word, parent, false);
@@ -80,8 +73,6 @@ public AdapterDoc(Context context, String[] config){
                 ViewHolderStaticText holderStaticText = (ViewHolderStaticText) holder;
                 holderStaticText.text.setContents(datasetContent[position]);
                 break;
-//            case DYNAMIC_TEXT_ID:
-//                break;
             case STATIC_BOXES_WORD_ID:
                 ViewHolderStaticBoxesWord holderStaticBoxesWord = (ViewHolderStaticBoxesWord)holder;
                 holderStaticBoxesWord.word.setContents(datasetContent[position]);
