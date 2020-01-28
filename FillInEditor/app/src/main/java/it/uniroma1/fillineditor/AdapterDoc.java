@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.viewComponents.CustomStaticTextView;
@@ -75,6 +76,7 @@ public AdapterDoc(Context context, String[] config){
                 break;
             case STATIC_BOXES_WORD_ID:
                 ViewHolderStaticBoxesWord holderStaticBoxesWord = (ViewHolderStaticBoxesWord)holder;
+                holderStaticBoxesWord.word.setActivity((AppCompatActivity)context);
                 holderStaticBoxesWord.word.setContents(datasetContent[position]);
                 break;
         }

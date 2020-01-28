@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +33,7 @@ public class CompileDocActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.doc_preview_recycler);
-        recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+//        recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

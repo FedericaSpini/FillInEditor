@@ -8,13 +8,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import it.uniroma1.fillineditor.data.DeviceData;
 import it.uniroma1.fillineditor.data.ItemData;
 import it.uniroma1.fillineditor.data.SessionData;
 import it.uniroma1.fillineditor.util.Chronometer;
@@ -29,15 +27,15 @@ public class WritableCharBoxView extends View {
 
     private ItemData itemData;
     private SessionData sessionData;
-    private DeviceData deviceData;
 
     public static final float TOUCH_TOLERANCE = 0;
 
+    private Activity activity;
 
     //appearance
     public static final float RADIUS_CURSOR = 30;
     public static final float RADIUS_UP_DOWN = 10;
-    public static final float RADIUS_MOVE = 4;
+    public static final float RADIUS_MOVE = 2;//prima era 4
     public static final Path.Direction CIRCLE_DIRECTION = Path.Direction.CW;
 
 
@@ -64,19 +62,8 @@ public class WritableCharBoxView extends View {
     private Path touchUpCirclePath;
     private Paint sampleUpPaint;
 
-    private final Paint borderLines;
-    private final Paint guideLines;
-
-    public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    private Activity activity;
-
+//    private final Paint borderLines;
+//    private final Paint guideLines;
 
     public WritableCharBoxView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -137,23 +124,23 @@ public class WritableCharBoxView extends View {
         cursorPaint.setStrokeJoin(Paint.Join.MITER);
         cursorPaint.setStrokeWidth(4f);
 
-        borderLines = new Paint();
-        borderLines.setAntiAlias(true);
-        borderLines.setDither(true);
-        borderLines.setColor(Color.WHITE);
-        borderLines.setStyle(Paint.Style.STROKE);
-        borderLines.setStrokeJoin(Paint.Join.ROUND);
-        borderLines.setStrokeCap(Paint.Cap.ROUND);
-        borderLines.setStrokeWidth(2);
-
-        guideLines = new Paint();
-        guideLines.setAntiAlias(true);
-        guideLines.setDither(true);
-        guideLines.setColor(Color.GRAY);
-        guideLines.setStyle(Paint.Style.STROKE);
-        guideLines.setStrokeJoin(Paint.Join.ROUND);
-        guideLines.setStrokeCap(Paint.Cap.ROUND);
-        guideLines.setStrokeWidth(1);
+//        borderLines = new Paint();
+//        borderLines.setAntiAlias(true);
+//        borderLines.setDither(true);
+//        borderLines.setColor(Color.WHITE);
+//        borderLines.setStyle(Paint.Style.STROKE);
+//        borderLines.setStrokeJoin(Paint.Join.ROUND);
+//        borderLines.setStrokeCap(Paint.Cap.ROUND);
+//        borderLines.setStrokeWidth(2);
+//
+//        guideLines = new Paint();
+//        guideLines.setAntiAlias(true);
+//        guideLines.setDither(true);
+//        guideLines.setColor(Color.GRAY);
+//        guideLines.setStyle(Paint.Style.STROKE);
+//        guideLines.setStrokeJoin(Paint.Join.ROUND);
+//        guideLines.setStrokeCap(Paint.Cap.ROUND);
+//        guideLines.setStrokeWidth(1);
 
     }
 
@@ -165,32 +152,39 @@ public class WritableCharBoxView extends View {
         privateCanvas.translate(-getLeft(), -getTop());
         initScreen();
     }
-
+//
+//    public static final float LOW_BAR_PERC_POS = 0.2f;
+//    public static final float HIGH_BAR_PERC_POS = 0.1f;
+//    public static final float VERTICAL_BAR_PERC_POS = 0.1f;
     private void initScreen()
     {
-        float startX = getLeft();
-        float startY = getTop();
+//        float startX = getLeft();
+//        float startY = getTop();
+//        privateBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.char_box_countour);
 
-        privateBitmap.eraseColor(getBackgroundColor());
+        privateBitmap.eraseColor(0xEEEEEE);
 
-        privateCanvas.drawLine(startX, startY, startX +getWidth(), startY, borderLines);
-        privateCanvas.drawLine(startX, startY + getHeight(), startX + getWidth(), startY + getHeight(), borderLines);
+//        privateBitmap.eraseColor(getBackgroundColor());
+//        privateBitmap.eraseColor(R.drawable.char_box_countour);
 
-//        if (sessionData.configuration.guide_lines) {
-//            privateCanvas.drawLine(startX, startY+ (getHeight()* LOW_BAR_PERC_POS), startX + getWidth(), startY + (getHeight()* LOW_BAR_PERC_POS), guideLines);
-//            privateCanvas.drawLine(startX,startY +  (getHeight()* HIGH_BAR_PERC_POS), startX +  getWidth(), startY +  (getHeight()* HIGH_BAR_PERC_POS), guideLines);
-//            privateCanvas.drawLine(startX + getWidth()* VERTICAL_BAR_PERC_POS, startY, startX +  getWidth()* VERTICAL_BAR_PERC_POS, startY + getHeight(), guideLines);
-//            privateCanvas.drawLine(startX + getWidth()*(1- VERTICAL_BAR_PERC_POS), startY, startX+ getWidth()*(1- VERTICAL_BAR_PERC_POS), startY+ getHeight(), guideLines);
-//        }
+//        privateCanvas.drawLine(startX, startY, startX +getWidth(), startY, borderLines);
+//        privateCanvas.drawLine(startX, startY + getHeight(), startX + getWidth(), startY + getHeight(), borderLines);
+//
+//
+//        privateCanvas.drawLine(startX, startY+ (getHeight()* LOW_BAR_PERC_POS), startX + getWidth(), startY + (getHeight()* LOW_BAR_PERC_POS), guideLines);
+//        privateCanvas.drawLine(startX,startY +  (getHeight()* HIGH_BAR_PERC_POS), startX +  getWidth(), startY +  (getHeight()* HIGH_BAR_PERC_POS), guideLines);
+//        privateCanvas.drawLine(startX + getWidth()* VERTICAL_BAR_PERC_POS, startY, startX +  getWidth()* VERTICAL_BAR_PERC_POS, startY + getHeight(), guideLines);
+//        privateCanvas.drawLine(startX + getWidth()*(1- VERTICAL_BAR_PERC_POS), startY, startX+ getWidth()*(1- VERTICAL_BAR_PERC_POS), startY+ getHeight(), guideLines);
+
 
         invalidate();
     }
 
-    private int getBackgroundColor() {
-        TypedValue a = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.windowBackground, a, true);
-        return a.data;
-    }
+//    private int getBackgroundColor() {
+//        TypedValue a = new TypedValue();
+//        getContext().getTheme().resolveAttribute(android.R.attr.windowBackground, a, true);
+//        return a.data;
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -301,6 +295,9 @@ public class WritableCharBoxView extends View {
 //        itemData.addMovementPoint(new TimedComponentFloatPoint(time, component, x, y));
 
         touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
+        privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADD");
+
 //        setTimerText(time + "");
     }
 
@@ -311,17 +308,20 @@ public class WritableCharBoxView extends View {
         float y = event.getRawY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                System.out.println("DOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWN");
                 is_only_down = true;
 
                 touch_start(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
+                System.out.println("MoìOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE!");
                 is_only_down = false;
                 touch_move(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
+                System.out.println("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUP");
                 if (is_only_down)
                 {
                     is_only_down = false;
@@ -402,7 +402,7 @@ public class WritableCharBoxView extends View {
     public void setItemData(ItemData data) {
         itemData = data;
         sessionData = data.session_data;
-        deviceData = sessionData.device_data;
+//        deviceData = sessionData.device_data;
     }
 
     public void finish()
@@ -417,6 +417,11 @@ public class WritableCharBoxView extends View {
             privateBitmap = null;
         }
     }
+
+
+    public Activity getActivity() {return activity;}
+
+    public void setActivity(Activity activity) {this.activity = activity;}
 
 
 

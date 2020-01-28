@@ -1,24 +1,27 @@
 package it.uniroma1.fillineditor.viewComponents;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.R;
-
+import it.uniroma1.fillineditor.data.ItemData;
+import it.uniroma1.fillineditor.data.SessionData;
 
 
 public class WritableBoxesWordAdapter extends RecyclerView.Adapter<WritableBoxesWordAdapter.WritableBoxViewHolder> {
 
     private int length;
-    private Context context;
-    public WritableBoxesWordAdapter (int length, Context context){
+    private AppCompatActivity activity;
+//    private Context context;
+    public WritableBoxesWordAdapter (int length, AppCompatActivity activity){
         setLength(length);
-        this.context=context;
+        this.activity=activity;
+//        this.context=context;
     }
 
 
@@ -43,8 +46,9 @@ public class WritableBoxesWordAdapter extends RecyclerView.Adapter<WritableBoxes
 
     @Override
     public void onBindViewHolder(@NonNull WritableBoxesWordAdapter.WritableBoxViewHolder holder, int position) {
-//        holder.box.setActivity(context);
+        holder.box.setActivity(activity);
 
+        holder.box.setItemData(new ItemData(new SessionData(), 4));
     }
 
     @Override

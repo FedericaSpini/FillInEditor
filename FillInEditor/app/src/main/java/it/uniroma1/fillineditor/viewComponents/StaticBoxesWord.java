@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,11 +15,13 @@ import it.uniroma1.fillineditor.R;
  * TODO: document your custom view class.
  */
 public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewComponents {
-    int index;
-    int length;
-    RecyclerView boxesRecycler;
-    RecyclerView.Adapter boxesRecyclerAdapter;
-    RecyclerView.LayoutManager boxesRecyclerLayoutManager;
+    private int index;
+    private int length;
+    private RecyclerView boxesRecycler;
+    private RecyclerView.Adapter boxesRecyclerAdapter;
+    private RecyclerView.LayoutManager boxesRecyclerLayoutManager;
+
+    private AppCompatActivity activity;
 
 
     public StaticBoxesWord(Context context) {
@@ -57,7 +60,7 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
             this.boxesRecyclerLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             this.boxesRecycler.setLayoutManager(this.boxesRecyclerLayoutManager);
 
-            this.boxesRecyclerAdapter = new WritableBoxesWordAdapter(length);
+            this.boxesRecyclerAdapter = new WritableBoxesWordAdapter(length, activity);
             this.boxesRecycler.setAdapter(this.boxesRecyclerAdapter);
 
         }
@@ -65,4 +68,8 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
             System.out.println("!!!Not valid data" + e.toString());
         }
     }
+
+    public AppCompatActivity getActivity() {return activity;}
+
+    public void setActivity(AppCompatActivity activity) {this.activity = activity;}
 }
