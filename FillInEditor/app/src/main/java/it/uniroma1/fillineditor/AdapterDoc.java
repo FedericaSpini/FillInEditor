@@ -9,8 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import it.uniroma1.fillineditor.data.ItemData;
+import it.uniroma1.fillineditor.data.SessionData;
 import it.uniroma1.fillineditor.viewComponents.CustomStaticTextView;
 import it.uniroma1.fillineditor.viewComponents.StaticBoxesWord;
+import it.uniroma1.fillineditor.viewComponents.WritableCharBoxView;
 
 import static it.uniroma1.fillineditor.viewComponents.DynamicDocViewComponents.STATIC_BOXES_WORD_ID;
 import static it.uniroma1.fillineditor.viewComponents.DynamicDocViewComponents.STATIC_TEXT_ID;
@@ -22,7 +25,12 @@ class AdapterDoc extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 public AdapterDoc(Context context, String[] config){
     this.context=context;
-    this.datasetContent = config;
+    String config2[] = new String[config.length+1];//TODO: da eliminare
+    for (int i = 0; i < config.length; i++)
+        config2[i] = config[i];
+    config2[config.length] = "3";
+    this.datasetContent = config2;
+
 }
 
     public class ViewHolderStaticText extends RecyclerView.ViewHolder {
@@ -34,14 +42,14 @@ public AdapterDoc(Context context, String[] config){
         }
     }
 
-//    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
-//        protected StaticCharBoxView charBox;
-//
-//        public ViewHolderDynamicText(StaticCharBoxView v) {
-//            super(v);
-//            charBox = v;
-//        }
-//    }
+    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
+        protected WritableCharBoxView charBox;
+
+        public ViewHolderDynamicText(WritableCharBoxView v) {
+            super(v);
+            charBox = v;
+        }
+    }
 
     public class ViewHolderStaticBoxesWord extends RecyclerView.ViewHolder{
         StaticBoxesWord word;
@@ -63,6 +71,10 @@ public AdapterDoc(Context context, String[] config){
                 StaticBoxesWord staticBoxesWord = (StaticBoxesWord) LayoutInflater.from(parent.getContext()).
                         inflate(R.layout.sample_static_boxes_word, parent, false);
                 return new ViewHolderStaticBoxesWord(staticBoxesWord);
+            case 3: //TODO: ELIMINA
+                WritableCharBoxView boxProva = (WritableCharBoxView) LayoutInflater.from(parent.getContext()).
+                        inflate(R.layout.sample_char_box, parent, false);
+                return new ViewHolderDynamicText(boxProva);
         }
         throw new RuntimeException("ATTENZIONE! NUMERO DI COMPONENTE NON VALIDO");
     }
@@ -79,6 +91,11 @@ public AdapterDoc(Context context, String[] config){
                 holderStaticBoxesWord.word.setActivity((AppCompatActivity)context);
                 holderStaticBoxesWord.word.setContents(datasetContent[position]);
                 break;
+            case 3:
+                ViewHolderDynamicText holderProva = (ViewHolderDynamicText) holder;
+                holderProva.charBox.setActivity((AppCompatActivity)context);
+                holderProva.charBox.setItemData(new ItemData(new SessionData(), 4));
+//                holderProva.charBox.invalidate();
         }
     }
 

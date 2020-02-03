@@ -26,12 +26,20 @@ public class WritableBoxesWordAdapter extends RecyclerView.Adapter<WritableBoxes
 
 
 
-    public static class WritableBoxViewHolder extends RecyclerView.ViewHolder{
+    public static class WritableBoxViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected WritableCharBoxView box;
 
         public WritableBoxViewHolder(@NonNull View itemView) {
             super(itemView);
             box = (WritableCharBoxView) itemView;
+            this.setIsRecyclable(true);
+        }
+
+        @Override
+        public void onClick(View v) {
+//            box.privateBitmap.eraseColor(Color.MAGENTA);
+            System.out.println("Ho cliccato su un oggetto "+this);
+
         }
     }
 
@@ -47,8 +55,8 @@ public class WritableBoxesWordAdapter extends RecyclerView.Adapter<WritableBoxes
     @Override
     public void onBindViewHolder(@NonNull WritableBoxesWordAdapter.WritableBoxViewHolder holder, int position) {
         holder.box.setActivity(activity);
-
         holder.box.setItemData(new ItemData(new SessionData(), 4));
+//        holder.box.invalidate();
     }
 
     @Override

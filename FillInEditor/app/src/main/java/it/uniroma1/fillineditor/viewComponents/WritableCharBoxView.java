@@ -41,7 +41,7 @@ public class WritableCharBoxView extends View {
 
     //private stuff
     private final Paint privateBitmapPaint;
-    private Bitmap privateBitmap;
+    public Bitmap privateBitmap;
     private Canvas privateCanvas;
 
     private final Path permanentLinePath;
@@ -95,7 +95,7 @@ public class WritableCharBoxView extends View {
         touchMoveCirclePath = new Path();
         sampleMovePaint = new Paint();
         sampleMovePaint.setAntiAlias(true);
-        sampleMovePaint.setColor(Color.WHITE);
+        sampleMovePaint.setColor(Color.BLACK);
         sampleMovePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         sampleMovePaint.setStrokeJoin(Paint.Join.MITER);
         sampleMovePaint.setStrokeWidth(1f);
@@ -119,7 +119,7 @@ public class WritableCharBoxView extends View {
         cursorPath = new Path();
         cursorPaint = new Paint();
         cursorPaint.setAntiAlias(true);
-        cursorPaint.setColor(Color.WHITE);
+        cursorPaint.setColor(Color.BLACK);
         cursorPaint.setStyle(Paint.Style.STROKE);
         cursorPaint.setStrokeJoin(Paint.Join.MITER);
         cursorPaint.setStrokeWidth(4f);
@@ -177,7 +177,7 @@ public class WritableCharBoxView extends View {
 //        privateCanvas.drawLine(startX + getWidth()*(1- VERTICAL_BAR_PERC_POS), startY, startX+ getWidth()*(1- VERTICAL_BAR_PERC_POS), startY+ getHeight(), guideLines);
 
 
-        invalidate();
+//        invalidate();
     }
 
 //    private int getBackgroundColor() {
@@ -188,6 +188,8 @@ public class WritableCharBoxView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        System.out.println("DRAW");
+
         super.onDraw(canvas);
         canvas.drawBitmap(privateBitmap, 0, 0, privateBitmapPaint);
 
@@ -199,6 +201,7 @@ public class WritableCharBoxView extends View {
 
         canvas.drawPath(sampledCirclePath, sampledCirclePaint);
         canvas.drawPath(cursorPath, cursorPaint);
+//        invalidate();
     }
 
     private Chronometer chrono;
@@ -206,7 +209,6 @@ public class WritableCharBoxView extends View {
     private void touch_start(float x, float y)
     {
 //        Log.i("START", String.format("to: (x: %f, y: %f)", x, y));
-
         long time;
         if (chrono == null) {
             chrono = new Chronometer();
@@ -278,25 +280,36 @@ public class WritableCharBoxView extends View {
     }
 
     private void saveDownEvent(long time, int component, float x, float y) {
+        System.out.println("DOWN");
+
 //        itemData.addTouchDownPoint(new TimedComponentFloatPoint(time, component, x, y));
 
         touchDownCirclePath.addCircle(x, y, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
+        invalidate();
+
 //        setTimerText(time + "");
     }
 
     private void saveUpEvent(long time,int component, float x, float y) {
+        System.out.println("UP");
+
 //        itemData.addTouchUpPoint(new TimedComponentFloatPoint(time, component, x, y));
 
         touchUpCirclePath.addCircle(mX, mY, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
+        invalidate();
+
 //        setTimerText(time + "");
     }
 
     private void saveMoveEvent(long time,int component, float x, float y) {
 //        itemData.addMovementPoint(new TimedComponentFloatPoint(time, component, x, y));
+        System.out.println("MOVE");
+
 
         touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
         privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADD");
+        invalidate();
+//        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA#AAAAAAAAAAAAAAAAAAAAAAADD");
 
 //        setTimerText(time + "");
     }
@@ -308,27 +321,23 @@ public class WritableCharBoxView extends View {
         float y = event.getRawY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                System.out.println("DOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWN");
                 is_only_down = true;
 
                 touch_start(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                System.out.println("MoìOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE!");
                 is_only_down = false;
                 touch_move(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                System.out.println("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUP");
                 if (is_only_down)
                 {
                     is_only_down = false;
                     touch_move((float) (x + 0.01), (float) (y + 0.01));
                     invalidate();
                 }
-
                 touch_up();
                 invalidate();
                 break;
