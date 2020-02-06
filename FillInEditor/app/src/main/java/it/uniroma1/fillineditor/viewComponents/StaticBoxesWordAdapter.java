@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.R;
+@Deprecated
 
 public class StaticBoxesWordAdapter extends RecyclerView.Adapter<StaticBoxesWordAdapter.StaticBoxViewHolder> {
 

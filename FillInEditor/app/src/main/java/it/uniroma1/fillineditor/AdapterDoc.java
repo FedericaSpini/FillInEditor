@@ -22,13 +22,12 @@ class AdapterDoc extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private String[] datasetContent;
 
-
 public AdapterDoc(Context context, String[] config){
     this.context=context;
     String config2[] = new String[config.length+1];//TODO: da eliminare
     for (int i = 0; i < config.length; i++)
         config2[i] = config[i];
-    config2[config.length] = "3";
+    config2[config.length] = "0";
     this.datasetContent = config2;
 
 }
@@ -95,7 +94,7 @@ public AdapterDoc(Context context, String[] config){
                 ViewHolderDynamicText holderProva = (ViewHolderDynamicText) holder;
                 holderProva.charBox.setActivity((AppCompatActivity)context);
                 holderProva.charBox.setItemData(new ItemData(new SessionData(), 4));
-//                holderProva.charBox.invalidate();
+                holderProva.charBox.invalidate();
         }
     }
 

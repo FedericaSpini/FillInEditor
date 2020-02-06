@@ -8,6 +8,7 @@ import android.widget.TextView;
 /**
  * TODO: document your custom view class.
  */
+@Deprecated
 public class StaticCharBoxView extends RelativeLayout implements DynamicDocViewComponents {
 
     private TextView textView;
