@@ -227,6 +227,8 @@ public class WritableCharBoxView extends View {
 
         mX = x;
         mY = y;
+
+        getParent().requestDisallowInterceptTouchEvent(true);
     }
 
     private void touch_move(float x, float y) {
@@ -277,6 +279,7 @@ public class WritableCharBoxView extends View {
         touchUpCirclePath.rewind();
 
         component_count++;
+        getParent().requestDisallowInterceptTouchEvent(false);
     }
 
     private void saveDownEvent(long time, int component, float x, float y) {
