@@ -227,6 +227,7 @@ public class WritableCharBoxView extends View {
 
         mX = x;
         mY = y;
+//        invalidate();
 
         getParent().requestDisallowInterceptTouchEvent(true);
     }
@@ -320,12 +321,13 @@ public class WritableCharBoxView extends View {
     boolean is_only_down = false;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getRawX();
-        float y = event.getRawY();
+//        float x = event.getRawX();
+//        float y = event.getRawY();
+        float x = event.getX()+RADIUS_CURSOR;
+        float y = event.getY()+RADIUS_CURSOR;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 is_only_down = true;
-
                 touch_start(x, y);
                 invalidate();
                 break;
