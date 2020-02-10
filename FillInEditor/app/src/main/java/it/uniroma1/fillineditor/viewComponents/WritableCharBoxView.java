@@ -321,10 +321,13 @@ public class WritableCharBoxView extends View {
     boolean is_only_down = false;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int[] boxLocation = new int[2];
+        getLocationOnScreen(boxLocation);
 //        float x = event.getRawX();
 //        float y = event.getRawY();
-        float x = event.getX()+RADIUS_CURSOR;
-        float y = event.getY()+RADIUS_CURSOR;
+        float x = event.getRawX();
+        float y = event.getRawY()+RADIUS_CURSOR-boxLocation[1];
+        System.out.println("POSIZIONE!!!!! "+boxLocation[0]+" , "+boxLocation[1]+" -VS- "+x + " , "+ y);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 is_only_down = true;

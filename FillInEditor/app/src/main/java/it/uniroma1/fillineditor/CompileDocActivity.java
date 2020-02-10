@@ -50,7 +50,7 @@ public class CompileDocActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onMove(View view, int position) {
+                    public void onFling(View view, int position) {
 //                        System.out.println("MOVE ACTION (FUSION OF SWIPES) "+position);
                     }
 

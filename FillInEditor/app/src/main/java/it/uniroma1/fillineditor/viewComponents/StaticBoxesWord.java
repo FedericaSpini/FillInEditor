@@ -71,7 +71,7 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
                         }
 
                         @Override
-                        public void onMove(View view, int position) {
+                        public void onFling(View view, int position) {
                             System.out.println("HO FLINGATO NELLA LISTA DI CARD, YEEEEEEEE "+position);
                         }
 

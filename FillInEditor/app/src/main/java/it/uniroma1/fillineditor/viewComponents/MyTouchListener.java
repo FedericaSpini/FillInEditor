@@ -24,7 +24,7 @@ public class MyTouchListener implements RecyclerView.OnItemTouchListener {
 //        public void onLeftSwipe(View view, int position);
 //        public void onRightSwipe(View view, int position);
         public void onClick(View view, int position);
-        public void onMove(View view, int position);
+        public void onFling(View view, int position);
         public void onScroll(View view, int position);
 
     }
@@ -49,14 +49,17 @@ public class MyTouchListener implements RecyclerView.OnItemTouchListener {
                 try {
                     View child = recyclerView.findChildViewUnder(e1.getX(), e1.getY());
                     int childPosition = recyclerView.getChildLayoutPosition(child);
-                    mOnTouchActionListener.onScroll(child, childPosition);
+                    if (childPosition==-1){
+                        System.out.println("SCROOOOOOOOOOOOOOOOOOOOOLL");
+                        return true;
+                    }
+//                    mOnTouchActionListener.onScroll(child, childPosition);
 
-//                    if (Math.abs(velocityX)>SWIPE_THRESHOLD_VELOCITY){
-//                        mOnTouchActionListener.onScroll(child, childPosition);
-//                    }
+                    if (Math.abs(velocityX)>SWIPE_THRESHOLD_VELOCITY){
+                        mOnTouchActionListener.onScroll(child, childPosition);
+                    }
                 } catch (Exception e) {
                 }
-
                 return false;
             }
 
@@ -73,7 +76,7 @@ public class MyTouchListener implements RecyclerView.OnItemTouchListener {
                     View child = recyclerView.findChildViewUnder(e1.getX(), e1.getY());
                     int childPosition = recyclerView.getChildPosition(child);
                     if (Math.abs(velocityX)>SWIPE_THRESHOLD_VELOCITY){
-                        mOnTouchActionListener.onMove(child, childPosition);
+                        mOnTouchActionListener.onFling(child, childPosition);
                     }
 
                     // right to left swipe
