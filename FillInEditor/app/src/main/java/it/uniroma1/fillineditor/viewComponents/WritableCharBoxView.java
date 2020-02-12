@@ -33,8 +33,8 @@ public class WritableCharBoxView extends View {
     private Activity activity;
 
     //appearance
-    public static final float RADIUS_CURSOR = 30;
-    public static final float RADIUS_UP_DOWN = 10;
+    public static final float RADIUS_CURSOR = 15;
+    public static final float RADIUS_UP_DOWN = 5;
     public static final float RADIUS_MOVE = 2;//prima era 4
     public static final Path.Direction CIRCLE_DIRECTION = Path.Direction.CW;
 
@@ -75,11 +75,11 @@ public class WritableCharBoxView extends View {
         linePaint = new Paint();
         linePaint.setAntiAlias(true);
         linePaint.setDither(true);
-        linePaint.setColor(Color.LTGRAY);
+        linePaint.setColor(Color.DKGRAY);
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setStrokeJoin(Paint.Join.ROUND);
         linePaint.setStrokeCap(Paint.Cap.ROUND);
-        linePaint.setStrokeWidth(1);
+        linePaint.setStrokeWidth(3);
 
         sampledCirclePath = new Path();
         sampledCirclePaint = new Paint();
@@ -208,6 +208,8 @@ public class WritableCharBoxView extends View {
     private float mX, mY;
     private void touch_start(float x, float y)
     {
+//        int[] boxLocation = new int[2];
+//        getLocationOnScreen(boxLocation);
 //        Log.i("START", String.format("to: (x: %f, y: %f)", x, y));
         long time;
         if (chrono == null) {
@@ -257,6 +259,8 @@ public class WritableCharBoxView extends View {
     }
 
     private void touch_up() {
+//        int[] boxLocation = new int[2];
+//        getLocationOnScreen(boxLocation);
 //        Log.i("UP", "-");
 
 
@@ -313,7 +317,6 @@ public class WritableCharBoxView extends View {
         touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
         privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
         invalidate();
-//        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA#AAAAAAAAAAAAAAAAAAAAAAADD");
 
 //        setTimerText(time + "");
     }
@@ -323,11 +326,15 @@ public class WritableCharBoxView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int[] boxLocation = new int[2];
         getLocationOnScreen(boxLocation);
-//        float x = event.getRawX();
-//        float y = event.getRawY();
         float x = event.getRawX();
-        float y = event.getRawY()+RADIUS_CURSOR-boxLocation[1];
-        System.out.println("POSIZIONE!!!!! "+boxLocation[0]+" , "+boxLocation[1]+" -VS- "+x + " , "+ y);
+        float y = event.getRawY() + (2*RADIUS_CURSOR) - boxLocation[1];
+        float relative_x = x - boxLocation[0];
+        float relative_y = y-(2*RADIUS_CURSOR);
+        System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
+        System.out.println(boxLocation[0] + ", " + boxLocation[1] + "\n");
+        if (relative_x>=0 && relative_x<=getWidth() && relative_y>=0 && relative_y<=getHeight()){
+        System.out.println(String.format("SEGNO FATTO!"));
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 is_only_down = true;
@@ -340,8 +347,7 @@ public class WritableCharBoxView extends View {
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                if (is_only_down)
-                {
+                if (is_only_down) {
                     is_only_down = false;
                     touch_move((float) (x + 0.01), (float) (y + 0.01));
                     invalidate();
@@ -350,6 +356,7 @@ public class WritableCharBoxView extends View {
                 invalidate();
                 break;
         }
+    }
         return true;
     }
 
