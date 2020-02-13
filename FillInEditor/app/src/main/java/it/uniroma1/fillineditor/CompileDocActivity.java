@@ -74,7 +74,6 @@ public class CompileDocActivity extends AppCompatActivity {
         }
         WritableCharBoxView prova = findViewById(R.id.prova);
         prova.setItemData(new ItemData(new SessionData(), 4));
-//        prova.invalidate();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

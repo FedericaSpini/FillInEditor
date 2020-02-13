@@ -33,7 +33,7 @@ public class WritableCharBoxView extends View {
     private Activity activity;
 
     //appearance
-    public static final float RADIUS_CURSOR = 15;
+    public static final float RADIUS_CURSOR = 10;
     public static final float RADIUS_UP_DOWN = 5;
     public static final float RADIUS_MOVE = 2;//prima era 4
     public static final Path.Direction CIRCLE_DIRECTION = Path.Direction.CW;
@@ -325,11 +325,12 @@ public class WritableCharBoxView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int[] boxLocation = new int[2];
-        getLocationOnScreen(boxLocation);
+        getLocationInWindow(boxLocation);
         float x = event.getRawX();
-        float y = event.getRawY() + (2*RADIUS_CURSOR) - boxLocation[1];
+//        float y = event.getRawY() + (RADIUS_CURSOR) - boxLocation[1];
+        float y = event.getRawY()-boxLocation[1];
         float relative_x = x - boxLocation[0];
-        float relative_y = y-(2*RADIUS_CURSOR);
+        float relative_y = y;
         System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
         System.out.println(boxLocation[0] + ", " + boxLocation[1] + "\n");
         if (relative_x>=0 && relative_x<=getWidth() && relative_y>=0 && relative_y<=getHeight()){
