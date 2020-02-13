@@ -2,7 +2,6 @@ package it.uniroma1.fillineditor;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import it.uniroma1.fillineditor.data.ItemData;
 import it.uniroma1.fillineditor.data.SessionData;
 import it.uniroma1.fillineditor.models.DynamicDocModel;
-import it.uniroma1.fillineditor.viewComponents.MyTouchListener;
 import it.uniroma1.fillineditor.viewComponents.WritableCharBoxView;
 
 
@@ -40,27 +38,7 @@ public class CompileDocActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.doc_recycler);
         recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
-        recyclerView.addOnItemTouchListener(new MyTouchListener(this,
-                recyclerView,
-                new MyTouchListener.OnTouchActionListener() {
-
-                    @Override
-                    public void onClick(View view, int position) {
-                        System.out.println("CLICK.... INUTILE" + position);
-                    }
-
-                    @Override
-                    public void onFling(View view, int position) {
-//                        System.out.println("MOVE ACTION (FUSION OF SWIPES) "+position);
-                    }
-
-                    @Override
-                    public void onScroll(View view, int position) {
-//                        System.out.println("SCROOOOL "+position);
-                    }
-                }));
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         try {
             String[] contents = doc.getStringContents();

@@ -3,7 +3,6 @@ package it.uniroma1.fillineditor.viewComponents;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,25 +60,6 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
             this.boxesRecyclerLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             this.boxesRecycler.setLayoutManager(this.boxesRecyclerLayoutManager);
 
-            boxesRecycler.addOnItemTouchListener(new MyTouchListener(getContext(),
-                    boxesRecycler,
-                    new MyTouchListener.OnTouchActionListener() {
-
-                        @Override
-                        public void onClick(View view, int position) {
-                            System.out.println("HO CLICCATO NELLA LISTA DI CARD, YEEEEEE" + position);
-                        }
-
-                        @Override
-                        public void onFling(View view, int position) {
-                            System.out.println("HO FLINGATO NELLA LISTA DI CARD, YEEEEEEEE "+position);
-                        }
-
-                        @Override
-                        public void onScroll(View view, int position) {
-                            System.out.println("HO SCROLLATO NELLA LISTA DI CARD, YEEEEEEE "+position);
-                        }
-                    }));
 
             this.boxesRecyclerAdapter = new WritableBoxesWordAdapter(length, activity);
             this.boxesRecycler.setAdapter(this.boxesRecyclerAdapter);

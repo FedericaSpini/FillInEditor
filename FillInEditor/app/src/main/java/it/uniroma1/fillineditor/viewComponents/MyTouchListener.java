@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+@Deprecated
 public class MyTouchListener implements RecyclerView.OnItemTouchListener {
 
 
@@ -50,8 +50,8 @@ public class MyTouchListener implements RecyclerView.OnItemTouchListener {
                     View child = recyclerView.findChildViewUnder(e1.getX(), e1.getY());
                     int childPosition = recyclerView.getChildLayoutPosition(child);
                     if (childPosition==-1){
-                        System.out.println("SCROOOOOOOOOOOOOOOOOOOOOLL");
-                        return true;
+//                        System.out.println("SCROOOOOOOOOOOOOOOOOOOOOLL");
+                        return false;
                     }
 //                    mOnTouchActionListener.onScroll(child, childPosition);
 

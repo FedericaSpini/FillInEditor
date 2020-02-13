@@ -317,7 +317,6 @@ public class WritableCharBoxView extends View {
         touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
         privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
         invalidate();
-
 //        setTimerText(time + "");
     }
 
@@ -326,38 +325,37 @@ public class WritableCharBoxView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int[] boxLocation = new int[2];
         getLocationInWindow(boxLocation);
+
         float x = event.getRawX();
-//        float y = event.getRawY() + (RADIUS_CURSOR) - boxLocation[1];
-        float y = event.getRawY()-boxLocation[1];
+        float y = event.getRawY()- boxLocation[1];
         float relative_x = x - boxLocation[0];
         float relative_y = y;
-        System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
+//        System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
         System.out.println(boxLocation[0] + ", " + boxLocation[1] + "\n");
         if (relative_x>=0 && relative_x<=getWidth() && relative_y>=0 && relative_y<=getHeight()){
-        System.out.println(String.format("SEGNO FATTO!"));
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                is_only_down = true;
-                touch_start(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                is_only_down = false;
-                touch_move(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                if (is_only_down) {
-                    is_only_down = false;
-                    touch_move((float) (x + 0.01), (float) (y + 0.01));
+            System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    is_only_down = true;
+                    touch_start(x, y);
                     invalidate();
-                }
-                touch_up();
-                invalidate();
-                break;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    is_only_down = false;
+                    touch_move(x, y);
+                    invalidate();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (is_only_down) {
+                        is_only_down = false;
+                        touch_move((float) (x + 0.01), (float) (y + 0.01));
+                        invalidate();
+                    }
+                    touch_up();
+                    invalidate();
+                    break;
+            }
         }
-    }
         return true;
     }
 

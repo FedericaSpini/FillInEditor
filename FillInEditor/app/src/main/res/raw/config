@@ -5,9 +5,15 @@
   "fields": [[3,4],[8,6]]
   },
   {
-    "id": 0,
+    "id": 1,
     "title": "Documento 2",
     "text": "Testo di prova2",
     "fields": [[0,9]]
+  },
+  {
+    "id": 2,
+    "title": "Documento 3",
+    "text": "Nome: Cognome: Residente in: ",
+    "fields": [[6,16],[15, 10],[29, 20]]
   }
 ]
