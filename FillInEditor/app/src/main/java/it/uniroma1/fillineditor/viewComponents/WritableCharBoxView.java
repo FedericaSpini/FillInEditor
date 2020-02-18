@@ -62,9 +62,6 @@ public class WritableCharBoxView extends View {
     private Path touchUpCirclePath;
     private Paint sampleUpPaint;
 
-//    private final Paint borderLines;
-//    private final Paint guideLines;
-
     public WritableCharBoxView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         
@@ -79,7 +76,7 @@ public class WritableCharBoxView extends View {
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setStrokeJoin(Paint.Join.ROUND);
         linePaint.setStrokeCap(Paint.Cap.ROUND);
-        linePaint.setStrokeWidth(3);
+        linePaint.setStrokeWidth(4);
 
         sampledCirclePath = new Path();
         sampledCirclePaint = new Paint();
@@ -119,29 +116,10 @@ public class WritableCharBoxView extends View {
         cursorPath = new Path();
         cursorPaint = new Paint();
         cursorPaint.setAntiAlias(true);
-        cursorPaint.setColor(Color.BLACK);
+        cursorPaint.setColor(Color.GRAY);
         cursorPaint.setStyle(Paint.Style.STROKE);
         cursorPaint.setStrokeJoin(Paint.Join.MITER);
-        cursorPaint.setStrokeWidth(4f);
-
-//        borderLines = new Paint();
-//        borderLines.setAntiAlias(true);
-//        borderLines.setDither(true);
-//        borderLines.setColor(Color.WHITE);
-//        borderLines.setStyle(Paint.Style.STROKE);
-//        borderLines.setStrokeJoin(Paint.Join.ROUND);
-//        borderLines.setStrokeCap(Paint.Cap.ROUND);
-//        borderLines.setStrokeWidth(2);
-//
-//        guideLines = new Paint();
-//        guideLines.setAntiAlias(true);
-//        guideLines.setDither(true);
-//        guideLines.setColor(Color.GRAY);
-//        guideLines.setStyle(Paint.Style.STROKE);
-//        guideLines.setStrokeJoin(Paint.Join.ROUND);
-//        guideLines.setStrokeCap(Paint.Cap.ROUND);
-//        guideLines.setStrokeWidth(1);
-
+        cursorPaint.setStrokeWidth(1f);
     }
 
     @Override
@@ -152,39 +130,11 @@ public class WritableCharBoxView extends View {
         privateCanvas.translate(-getLeft(), -getTop());
         initScreen();
     }
-//
-//    public static final float LOW_BAR_PERC_POS = 0.2f;
-//    public static final float HIGH_BAR_PERC_POS = 0.1f;
-//    public static final float VERTICAL_BAR_PERC_POS = 0.1f;
+
     private void initScreen()
     {
-//        float startX = getLeft();
-//        float startY = getTop();
-//        privateBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.char_box_countour);
-
         privateBitmap.eraseColor(0xEEEEEE);
-
-//        privateBitmap.eraseColor(getBackgroundColor());
-//        privateBitmap.eraseColor(R.drawable.char_box_countour);
-
-//        privateCanvas.drawLine(startX, startY, startX +getWidth(), startY, borderLines);
-//        privateCanvas.drawLine(startX, startY + getHeight(), startX + getWidth(), startY + getHeight(), borderLines);
-//
-//
-//        privateCanvas.drawLine(startX, startY+ (getHeight()* LOW_BAR_PERC_POS), startX + getWidth(), startY + (getHeight()* LOW_BAR_PERC_POS), guideLines);
-//        privateCanvas.drawLine(startX,startY +  (getHeight()* HIGH_BAR_PERC_POS), startX +  getWidth(), startY +  (getHeight()* HIGH_BAR_PERC_POS), guideLines);
-//        privateCanvas.drawLine(startX + getWidth()* VERTICAL_BAR_PERC_POS, startY, startX +  getWidth()* VERTICAL_BAR_PERC_POS, startY + getHeight(), guideLines);
-//        privateCanvas.drawLine(startX + getWidth()*(1- VERTICAL_BAR_PERC_POS), startY, startX+ getWidth()*(1- VERTICAL_BAR_PERC_POS), startY+ getHeight(), guideLines);
-
-
-//        invalidate();
     }
-
-//    private int getBackgroundColor() {
-//        TypedValue a = new TypedValue();
-//        getContext().getTheme().resolveAttribute(android.R.attr.windowBackground, a, true);
-//        return a.data;
-//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -198,19 +148,14 @@ public class WritableCharBoxView extends View {
         canvas.drawPath(touchMoveCirclePath, sampleMovePaint);
         canvas.drawPath(touchDownCirclePath, sampleDownPaint);
         canvas.drawPath(touchUpCirclePath, sampleUpPaint);
-
         canvas.drawPath(sampledCirclePath, sampledCirclePaint);
         canvas.drawPath(cursorPath, cursorPaint);
-//        invalidate();
     }
 
     private Chronometer chrono;
     private float mX, mY;
-    private void touch_start(float x, float y)
+    private void touch_start(float x, float relative_x, float y)
     {
-//        int[] boxLocation = new int[2];
-//        getLocationOnScreen(boxLocation);
-//        Log.i("START", String.format("to: (x: %f, y: %f)", x, y));
         long time;
         if (chrono == null) {
             chrono = new Chronometer();
@@ -220,7 +165,6 @@ public class WritableCharBoxView extends View {
         }
 
         linePath.rewind();
-
         linePath.moveTo(x, y);
         permanentLinePath.moveTo(x, y);
 
@@ -229,14 +173,11 @@ public class WritableCharBoxView extends View {
 
         mX = x;
         mY = y;
-//        invalidate();
 
         getParent().requestDisallowInterceptTouchEvent(true);
     }
 
-    private void touch_move(float x, float y) {
-//        Log.i("MOVE", String.format("to: (x: %f, y: %f)", x, y));
-
+    private void touch_move(float x, float relative_x, float y) {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
         float xavg;
@@ -259,11 +200,6 @@ public class WritableCharBoxView extends View {
     }
 
     private void touch_up() {
-//        int[] boxLocation = new int[2];
-//        getLocationOnScreen(boxLocation);
-//        Log.i("UP", "-");
-
-
         linePath.lineTo(mX, mY);
         permanentLinePath.lineTo(mX, mY);
 
@@ -271,17 +207,18 @@ public class WritableCharBoxView extends View {
 
         cursorPath.rewind();
 
+        //TODO: RIPRENDI DA QUI
         // commit the path to our offscreen
-        privateCanvas.drawPath(linePath, linePaint);
-        privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
-        privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
-        privateCanvas.drawPath(touchUpCirclePath, sampleUpPaint);
+//        privateCanvas.drawPath(linePath, linePaint);
+//        privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
+//        privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
+//        privateCanvas.drawPath(touchUpCirclePath, sampleUpPaint);
 
         // kill this so we don't double draw
-        linePath.rewind();
-        touchMoveCirclePath.rewind();
-        touchDownCirclePath.rewind();
-        touchUpCirclePath.rewind();
+//        linePath.rewind();
+//        touchMoveCirclePath.rewind();
+//        touchDownCirclePath.rewind();
+//        touchUpCirclePath.rewind();
 
         component_count++;
         getParent().requestDisallowInterceptTouchEvent(false);
@@ -302,7 +239,6 @@ public class WritableCharBoxView extends View {
         System.out.println("UP");
 
 //        itemData.addTouchUpPoint(new TimedComponentFloatPoint(time, component, x, y));
-
         touchUpCirclePath.addCircle(mX, mY, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
         invalidate();
 
@@ -337,18 +273,18 @@ public class WritableCharBoxView extends View {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     is_only_down = true;
-                    touch_start(x, y);
+                    touch_start(x, relative_x, y);
                     invalidate();
                     break;
                 case MotionEvent.ACTION_MOVE:
                     is_only_down = false;
-                    touch_move(x, y);
+                    touch_move(x, relative_x, y);
                     invalidate();
                     break;
                 case MotionEvent.ACTION_UP:
                     if (is_only_down) {
                         is_only_down = false;
-                        touch_move((float) (x + 0.01), (float) (y + 0.01));
+                        touch_move((float) (x + 0.01), (float) (relative_x + 0.01), (float) (y + 0.01));
                         invalidate();
                     }
                     touch_up();
