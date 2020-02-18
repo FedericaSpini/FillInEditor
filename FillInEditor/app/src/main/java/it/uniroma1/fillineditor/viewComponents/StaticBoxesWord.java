@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +58,7 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
             length = Integer.parseInt(indexLength[1]);
 
             this.boxesRecycler = (RecyclerView)findViewById(R.id.boxes_recycler);
+            this.boxesRecycler.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGrayCyan));
             this.boxesRecyclerLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             this.boxesRecycler.setLayoutManager(this.boxesRecyclerLayoutManager);
 

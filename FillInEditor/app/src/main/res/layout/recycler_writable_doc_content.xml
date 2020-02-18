@@ -5,8 +5,5 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/writable_doc_content_recycler"
-    android:scrollbars="vertical"
-    android:fadeScrollbars="true"
-    android:scrollbarSize="15dp"
     />
 

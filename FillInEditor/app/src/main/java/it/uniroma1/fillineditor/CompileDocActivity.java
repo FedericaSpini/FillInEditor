@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,16 +31,14 @@ public class CompileDocActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.doc_recycler);
-        recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+//        recyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         try {
             String[] contents = doc.getStringContents();
             AdapterDoc myAdapter = new AdapterDoc(this,contents);
-//            recyclerView.setWillNotDraw(false);
             recyclerView.setAdapter(myAdapter);
-//            recyclerView.setWillNotDraw(false);
         }
         catch (Exception e){
             System.out.println("This document has not contents!!!!!!!!!!");

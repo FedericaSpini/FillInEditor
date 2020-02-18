@@ -22,13 +22,7 @@ class AdapterDoc extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 public AdapterDoc(Context context, String[] config){
     this.context=context;
-//    String config2[] = new String[config.length+1];//TODO: da eliminare
-//    for (int i = 0; i < config.length; i++)
-//        config2[i] = config[i];
-//    config2[config.length] = "0";
-//    this.datasetContent = config2;
     this.datasetContent = config;
-
 }
 
     public class ViewHolderStaticText extends RecyclerView.ViewHolder {
@@ -69,10 +63,6 @@ public AdapterDoc(Context context, String[] config){
                 StaticBoxesWord staticBoxesWord = (StaticBoxesWord) LayoutInflater.from(parent.getContext()).
                         inflate(R.layout.sample_static_boxes_word, parent, false);
                 return new ViewHolderStaticBoxesWord(staticBoxesWord);
-//            case 3: //TODO: ELIMINA
-//                WritableCharBoxView boxProva = (WritableCharBoxView) LayoutInflater.from(parent.getContext()).
-//                        inflate(R.layout.sample_char_box, parent, false);
-//                return new ViewHolderDynamicText(boxProva);
         }
         throw new RuntimeException("ATTENZIONE! NUMERO DI COMPONENTE NON VALIDO");
     }
@@ -89,11 +79,6 @@ public AdapterDoc(Context context, String[] config){
                 holderStaticBoxesWord.word.setActivity((AppCompatActivity)context);
                 holderStaticBoxesWord.word.setContents(datasetContent[position]);
                 break;
-//            case 3:
-//                ViewHolderDynamicText holderProva = (ViewHolderDynamicText) holder;
-//                holderProva.charBox.setActivity((AppCompatActivity)context);
-//                holderProva.charBox.setItemData(new ItemData(new SessionData(), 4));
-//                holderProva.charBox.invalidate();
         }
     }
 

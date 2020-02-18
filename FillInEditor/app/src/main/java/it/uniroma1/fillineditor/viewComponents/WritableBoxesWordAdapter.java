@@ -24,18 +24,13 @@ public class WritableBoxesWordAdapter extends RecyclerView.Adapter<WritableBoxes
 
 
 
-    public static class WritableBoxViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        protected WritableCharBoxView box;
+public static class WritableBoxViewHolder extends RecyclerView.ViewHolder {
+    protected WritableCharBoxView box;
 
         public WritableBoxViewHolder(@NonNull View itemView) {
             super(itemView);
             box = (WritableCharBoxView) itemView;
             this.setIsRecyclable(true);
-        }
-
-        @Override
-        public void onClick(View v) {
-            System.out.println("Ho cliccato su un oggetto "+this);
         }
     }
 
