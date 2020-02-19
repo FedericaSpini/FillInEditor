@@ -13,6 +13,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import it.uniroma1.fillineditor.data.DeviceData;
 import it.uniroma1.fillineditor.data.ItemData;
 import it.uniroma1.fillineditor.data.SessionData;
 import it.uniroma1.fillineditor.util.Chronometer;
@@ -27,15 +28,17 @@ public class WritableCharBoxView extends View {
 
     private ItemData itemData;
     private SessionData sessionData;
+    private DeviceData deviceData;
 
     public static final float TOUCH_TOLERANCE = 0;
 
+    //appearance
     private Activity activity;
 
-    //appearance
     public static final float RADIUS_CURSOR = 10;
     public static final float RADIUS_UP_DOWN = 5;
-    public static final float RADIUS_MOVE = 2;//prima era 4
+    public static final float RADIUS_MOVE = 2;
+    public static final float RADIUS_SAMPLED = 15;
     public static final Path.Direction CIRCLE_DIRECTION = Path.Direction.CW;
 
 
@@ -54,7 +57,6 @@ public class WritableCharBoxView extends View {
 
     private final Path sampledCirclePath;
     private final Paint sampledCirclePaint;
-
     private final Path touchMoveCirclePath;
     private final Paint sampleMovePaint;
     private final Path touchDownCirclePath;
@@ -66,6 +68,7 @@ public class WritableCharBoxView extends View {
         super(context, attrs);
         
         privateBitmapPaint = new Paint(Paint.DITHER_FLAG);
+        // LinePath must be resetted each time for efficiency
         permanentLinePath = new Path();
 
         linePath = new Path();
@@ -76,7 +79,7 @@ public class WritableCharBoxView extends View {
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setStrokeJoin(Paint.Join.ROUND);
         linePaint.setStrokeCap(Paint.Cap.ROUND);
-        linePaint.setStrokeWidth(4);
+        linePaint.setStrokeWidth(2);
 
         sampledCirclePath = new Path();
         sampledCirclePaint = new Paint();
@@ -206,14 +209,12 @@ public class WritableCharBoxView extends View {
         saveUpEvent(chrono.getElapsedTime(), component_count, mX, mY);
 
         cursorPath.rewind();
-
-        //TODO: RIPRENDI DA QUI
+        //TODO capisci quale è il senso delle prossime 8 righe
         // commit the path to our offscreen
-//        privateCanvas.drawPath(linePath, linePaint);
-//        privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
-//        privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
-//        privateCanvas.drawPath(touchUpCirclePath, sampleUpPaint);
-
+        privateCanvas.drawPath(linePath, linePaint);
+        privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
+        privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
+        privateCanvas.drawPath(touchUpCirclePath, sampleUpPaint);
         // kill this so we don't double draw
 //        linePath.rewind();
 //        touchMoveCirclePath.rewind();
@@ -268,7 +269,7 @@ public class WritableCharBoxView extends View {
         float relative_y = y;
 //        System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
         System.out.println(boxLocation[0] + ", " + boxLocation[1] + "\n");
-        if (relative_x>=0 && relative_x<=getWidth() && relative_y>=0 && relative_y<=getHeight()){
+        if (relative_x>=0 && relative_x<=getWidth() && relative_y>=0 && relative_y<=getHeight()+ (RADIUS_CURSOR/2)){
             System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -291,6 +292,9 @@ public class WritableCharBoxView extends View {
                     invalidate();
                     break;
             }
+        }
+        else {
+            touch_up();
         }
         return true;
     }
