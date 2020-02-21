@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import it.uniroma1.fillineditor.data.DeviceData;
 import it.uniroma1.fillineditor.data.ItemData;
 import it.uniroma1.fillineditor.data.SessionData;
+import it.uniroma1.fillineditor.data.TimedComponentFloatPoint;
 import it.uniroma1.fillineditor.util.Chronometer;
 
 /**
@@ -171,8 +172,10 @@ public class WritableCharBoxView extends View {
         linePath.moveTo(x, y);
         permanentLinePath.moveTo(x, y);
 
-        saveMoveEvent(time, component_count, x, y);
-        saveDownEvent(time, component_count, x, y);
+//        saveMoveEvent(time, component_count, x, y);
+//        saveDownEvent(time, component_count, x, y);
+        saveMoveEvent(time, component_count, x, relative_x, y);
+        saveDownEvent(time, component_count, x, relative_x, y);
 
         mX = x;
         mY = y;
@@ -195,7 +198,7 @@ public class WritableCharBoxView extends View {
             mX = x;
             mY = y;
 
-            saveMoveEvent(chrono.getElapsedTime(), component_count, x, y);
+            saveMoveEvent(chrono.getElapsedTime(), component_count, x, relative_x,  y);
 
             cursorPath.rewind();
             cursorPath.addCircle(x, y, RADIUS_CURSOR, CIRCLE_DIRECTION);
@@ -225,7 +228,7 @@ public class WritableCharBoxView extends View {
         getParent().requestDisallowInterceptTouchEvent(false);
     }
 
-    private void saveDownEvent(long time, int component, float x, float y) {
+    private void saveDownEvent(long time, int component, float x,  float relative_x, float y) {
         System.out.println("DOWN");
 
 //        itemData.addTouchDownPoint(new TimedComponentFloatPoint(time, component, x, y));
@@ -239,15 +242,15 @@ public class WritableCharBoxView extends View {
     private void saveUpEvent(long time,int component, float x, float y) {
         System.out.println("UP");
 
-//        itemData.addTouchUpPoint(new TimedComponentFloatPoint(time, component, x, y));
+        itemData.addTouchUpPoint(new TimedComponentFloatPoint(time, component, x, y));
         touchUpCirclePath.addCircle(mX, mY, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
         invalidate();
 
 //        setTimerText(time + "");
     }
 
-    private void saveMoveEvent(long time,int component, float x, float y) {
-//        itemData.addMovementPoint(new TimedComponentFloatPoint(time, component, x, y));
+    private void saveMoveEvent(long time,int component, float x,  float relative_x, float y) {
+        itemData.addMovementPoint(new TimedComponentFloatPoint(time, component, x, y));
         System.out.println("MOVE");
 
 

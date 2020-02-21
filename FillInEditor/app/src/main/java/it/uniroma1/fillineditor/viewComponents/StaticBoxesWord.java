@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.R;
+import it.uniroma1.fillineditor.models.DocCompilationModality;
 
 /**
  * TODO: document your custom view class.
@@ -75,4 +76,28 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
     public AppCompatActivity getActivity() {return activity;}
 
     public void setActivity(AppCompatActivity activity) {this.activity = activity;}
+
+    public void turnContent(DocCompilationModality mod){
+        for(int i = 0; i<boxesRecycler.getAdapter().getItemCount(); i++) {
+            WritableCharBoxView charBoxView = (WritableCharBoxView) boxesRecycler.getChildAt(i);
+            if (charBoxView != null) {
+                switch (mod) {
+                    case PEN:
+                        System.out.println("PEEEEEEEEEEEEEEEEEEEEN   " + charBoxView);
+                    charBoxView.resetPath();
+                        break;
+                    case DEBUG:
+                        System.out.println("DEBUG!  " + charBoxView);
+                    charBoxView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                        break;
+                    case GRAPHOMETRIC:
+                        System.out.println("GRAFOMETRIA PORTAMI VIA  " + charBoxView);
+                    charBoxView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGrayCyan));
+                        break;
+                }
+            }
+        }
+    }
+
+
 }

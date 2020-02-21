@@ -93,4 +93,13 @@ public AdapterDoc(Context context, String[] config){
     public int getItemViewType(int position){
     return Integer.parseInt(String.valueOf(datasetContent[position].charAt(0)));
     }
+
+//    public void turnContent(DocCompilationModality mod){
+//        for(int i = 0; i<getItemCount(); i++){
+//            if (getItemViewType(i) == STATIC_BOXES_WORD_ID){
+//
+//            }
+//        }
+//
+//    }
 }
