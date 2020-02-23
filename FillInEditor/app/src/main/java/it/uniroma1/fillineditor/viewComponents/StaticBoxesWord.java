@@ -81,20 +81,7 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
         for(int i = 0; i<boxesRecycler.getAdapter().getItemCount(); i++) {
             WritableCharBoxView charBoxView = (WritableCharBoxView) boxesRecycler.getChildAt(i);
             if (charBoxView != null) {
-                switch (mod) {
-                    case PEN:
-                        System.out.println("PEEEEEEEEEEEEEEEEEEEEN   " + charBoxView);
-                    charBoxView.resetPath();
-                        break;
-                    case DEBUG:
-                        System.out.println("DEBUG!  " + charBoxView);
-                    charBoxView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
-                        break;
-                    case GRAPHOMETRIC:
-                        System.out.println("GRAFOMETRIA PORTAMI VIA  " + charBoxView);
-                    charBoxView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGrayCyan));
-                        break;
-                }
+                charBoxView.turnContent(mod);
             }
         }
     }
