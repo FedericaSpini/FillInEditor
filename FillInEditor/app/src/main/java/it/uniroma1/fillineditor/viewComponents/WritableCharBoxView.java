@@ -75,6 +75,8 @@ public class WritableCharBoxView extends View {
     private Paint sampleUpPaint;
 
     private DocCompilationModality modality;
+    boolean is_only_down = false;
+
 
     public WritableCharBoxView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -174,27 +176,78 @@ public class WritableCharBoxView extends View {
 
     private Chronometer chrono;
     private float mX, mY;
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int[] boxLocation = new int[2];
+        getLocationInWindow(boxLocation);
+
+        float x = event.getRawX();
+//        float y = event.getRawY();
+        float relative_x = x - boxLocation[0];
+        float y = event.getRawY() - boxLocation[1];
+//        System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
+        System.out.println(boxLocation[0] + ", " + boxLocation[1] + "\n");
+
+
+        if (relative_x>=0 && relative_x<=getWidth() && y>=0 && y<=getHeight()+ (RADIUS_CURSOR/2)){
+//            System.out.println("#############################################################################################################################################################################################################################################################################################################################################################################################################################");
+            System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f", x, relative_x,  y));
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    is_only_down = true;
+//                    touch_start(x, relative_x, y);
+                    touch_start(x, relative_x, y);
+                    invalidate();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    is_only_down = false;
+//                    touch_move(x, relative_x, y);
+                    touch_move(x, relative_x, y);
+                    invalidate();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (is_only_down) {
+                        is_only_down = false;
+//                        touch_move((float) (x + 0.01), (float) (relative_x + 0.01), (float) (y + 0.01));
+                        touch_move((float) (x + 0.01), (float) (relative_x + 0.01), (float) (y + 0.01));
+                        invalidate();
+                    }
+                    touch_up();
+                    invalidate();
+                    break;
+            }
+        }
+        else {
+            touch_up();
+        }
+        return true;
+    }
+
     private void touch_start(float x, float relative_x, float y)
     {
-        long time;
-        if (chrono == null) {
-            chrono = new Chronometer();
-            time = 0;
-        } else {
-            time = chrono.getElapsedTime();
-        }
+//        long time;
+//        if (chrono == null) {
+//            chrono = new Chronometer();
+//            time = 0;
+//        } else {
+//            time = chrono.getElapsedTime();
+//        }
 
         linePath.rewind();
 
         linePath.moveTo(x, y);
         permanentLinePath.moveTo(x, y);
-//        linePath.moveTo(relative_x, y);
-//        permanentLinePath.moveTo(relative_x, y);
 
 //        saveMoveEvent(time, component_count, x, y);
 //        saveDownEvent(time, component_count, x, y);
-        saveMoveEvent(time, component_count, x, relative_x, y);
-        saveDownEvent(time, component_count, x, relative_x, y);
+        touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
+        touchDownCirclePath.addCircle(x, y, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
+
+//         ***DA AGGIUNGERE DOPO***
+//        saveMoveEvent(time, component_count, x, relative_x, y);
+//        saveDownEvent(time, component_count, x, relative_x, y);
 
         mX = x;
         mY = y;
@@ -216,8 +269,9 @@ public class WritableCharBoxView extends View {
 
             mX = x;
             mY = y;
+            touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
 
-            saveMoveEvent(chrono.getElapsedTime(), component_count, x, relative_x,  y);
+//            saveMoveEvent(chrono.getElapsedTime(), component_count, x, relative_x,  y);
 
             cursorPath.rewind();
             cursorPath.addCircle(x, y, RADIUS_CURSOR, CIRCLE_DIRECTION);
@@ -227,13 +281,15 @@ public class WritableCharBoxView extends View {
     private void touch_up() {
         linePath.lineTo(mX, mY);
         permanentLinePath.lineTo(mX, mY);
+        touchUpCirclePath.addCircle(mX, mY, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
 
-        saveUpEvent(chrono.getElapsedTime(), component_count, mX, mY);
+
+//        saveUpEvent(chrono.getElapsedTime(), component_count, mX, mY);
 
         cursorPath.rewind();
         //TODO capisci quale è il senso delle prossime 8 righe
         // commit the path to our offscreen
-        privateCanvas.translate(-getLeft(),-getTop());
+//        privateCanvas.translate(-getLeft(),-getTop());
         privateCanvas.drawPath(linePath, linePaint);
         privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
         privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
@@ -253,8 +309,7 @@ public class WritableCharBoxView extends View {
         System.out.println("DOWN");
 
         itemData.addTouchDownPoint(new TimedComponentFloatPoint(time, component, x, y));
-        touchDownCirclePath.addCircle(x, y, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
-        invalidate();
+//        touchDownCirclePath.addCircle(x, y, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
 
 //        setTimerText(time + "");
     }
@@ -263,66 +318,15 @@ public class WritableCharBoxView extends View {
         System.out.println("UP");
 
         itemData.addTouchUpPoint(new TimedComponentFloatPoint(time, component, x, y));
-        touchUpCirclePath.addCircle(mX, mY, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
-        invalidate();
-
-//        setTimerText(time + "");
+//        touchUpCirclePath.addCircle(mX, mY, RADIUS_UP_DOWN, CIRCLE_DIRECTION);
+        //        setTimerText(time + "");
     }
 
     private void saveMoveEvent(long time,int component, float x,  float relative_x, float y) {
         itemData.addMovementPoint(new TimedComponentFloatPoint(time, component, x, y));
         System.out.println("MOVE");
-
-        privateCanvas.translate(-getLeft(),-getTop());
-
-        touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
-//        privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
-        invalidate();
+//        touchMoveCirclePath.addCircle(x, y, RADIUS_MOVE, CIRCLE_DIRECTION);
 //        setTimerText(time + "");
-    }
-
-    boolean is_only_down = false;
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int[] boxLocation = new int[2];
-        getLocationInWindow(boxLocation);
-
-        float x = event.getRawX();
-//        float y = event.getRawY();
-        float relative_x = x - boxLocation[0];
-        float relative_y = event.getRawY() - boxLocation[1];
-//        System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
-        System.out.println(boxLocation[0] + ", " + boxLocation[1] + "\n");
-        if (relative_x>=0 && relative_x<=getWidth() && relative_y>=0 && relative_y<=getHeight()+ (RADIUS_CURSOR/2)){
-            System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f, %f", x, relative_x, y, relative_y));
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    is_only_down = true;
-//                    touch_start(x, relative_x, y);
-                    touch_start(x, relative_x, relative_y);
-                    invalidate();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    is_only_down = false;
-//                    touch_move(x, relative_x, y);
-                    touch_move(x, relative_x, relative_y);
-                    invalidate();
-                    break;
-                case MotionEvent.ACTION_UP:
-                    if (is_only_down) {
-                        is_only_down = false;
-                        touch_move((float) (x + 0.01), (float) (relative_x + 0.01), (float) (y + 0.01));
-                        invalidate();
-                    }
-                    touch_up();
-                    invalidate();
-                    break;
-            }
-        }
-        else {
-            touch_up();
-        }
-        return true;
     }
 
     private void sampleFuctionLine() {
