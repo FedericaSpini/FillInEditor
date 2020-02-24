@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import it.uniroma1.fillineditor.viewComponents.CustomStaticTextView;
 import it.uniroma1.fillineditor.viewComponents.StaticBoxesWord;
-import it.uniroma1.fillineditor.viewComponents.WritableCharBoxView;
 
 import static it.uniroma1.fillineditor.viewComponents.DynamicDocViewComponents.STATIC_BOXES_WORD_ID;
 import static it.uniroma1.fillineditor.viewComponents.DynamicDocViewComponents.STATIC_TEXT_ID;
@@ -34,14 +33,14 @@ public AdapterDoc(Context context, String[] config){
         }
     }
 
-    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
-        protected WritableCharBoxView charBox;
-
-        public ViewHolderDynamicText(WritableCharBoxView v) {
-            super(v);
-            charBox = v;
-        }
-    }
+//    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
+//        protected WritableCharBoxView charBox;
+//
+//        public ViewHolderDynamicText(WritableCharBoxView v) {
+//            super(v);
+//            charBox = v;
+//        }
+//    }
 
     public class ViewHolderStaticBoxesWord extends RecyclerView.ViewHolder{
         StaticBoxesWord word;
@@ -93,13 +92,4 @@ public AdapterDoc(Context context, String[] config){
     public int getItemViewType(int position){
     return Integer.parseInt(String.valueOf(datasetContent[position].charAt(0)));
     }
-
-//    public void turnContent(DocCompilationModality mod){
-//        for(int i = 0; i<getItemCount(); i++){
-//            if (getItemViewType(i) == STATIC_BOXES_WORD_ID){
-//
-//            }
-//        }
-//
-//    }
 }

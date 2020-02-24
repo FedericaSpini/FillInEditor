@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    <item-->
-<!--        android:id="@+id/pen_mod"-->
-<!--        android:icon="@drawable/ic_create_black_24dp"-->
-<!--        android:title="pen" />-->
-
-<!--    <item-->
-<!--        android:id="@+id/graphometric_mod"-->
-<!--        android:icon="@drawable/ic_accessibility_black_24dp"-->
-<!--        android:title="graphometry" />-->
-
-<!--    <item-->
-<!--        android:id="@+id/debug_mod"-->
-<!--        android:icon="@drawable/ic_bug_report_black_24dp"-->
-<!--        android:title="debug" />-->
 
     <item
         android:id="@+id/save_doc"
         android:icon="@drawable/ic_check_black_24dp"
         android:title="Finish" />
 
-<!--    <item-->
-<!--        android:id="@+id/delete_doc"-->
-<!--        android:icon="@drawable/ic_clear_black_24dp"-->
-<!--        android:title="cancel" />-->
 
 </menu>

@@ -14,15 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".CompileDocActivity">
-
-<!--        <it.uniroma1.fillineditor.viewComponents.WritableCharBoxView-->
-<!--            android:layout_height="150dp"-->
-<!--            android:layout_width="150dp"-->
-<!--            android:id="@+id/prova"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            android:background="@drawable/char_box_countour"-->
-<!--            />-->
         <TextView
             android:id="@+id/static_text"
             android:layout_width="wrap_content"

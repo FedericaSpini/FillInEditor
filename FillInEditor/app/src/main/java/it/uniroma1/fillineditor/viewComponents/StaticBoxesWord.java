@@ -29,28 +29,19 @@ public class StaticBoxesWord extends RelativeLayout implements  DynamicDocViewCo
 
     private AppCompatActivity activity;
 
-//    private Button clearButton;
-//    private Button confirmButton;
-
 
     public StaticBoxesWord(Context context) {
         super(context);
-//        clearButton = (Button)findViewById(R.id.clear_button);
-//        confirmButton = (Button)findViewById(R.id.confirm_button);
         init(null, 0);
     }
 
     public StaticBoxesWord(Context context, AttributeSet attrs) {
         super(context, attrs);
-//        clearButton = (Button)findViewById(R.id.clear_button);
-//        confirmButton = (Button)findViewById(R.id.confirm_button);
         init(attrs, 0);
     }
 
     public StaticBoxesWord(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-//        clearButton = (Button)findViewById(R.id.clear_button);
-//        confirmButton = (Button)findViewById(R.id.confirm_button);
         init(attrs, defStyle);
     }
 
@@ -65,30 +56,6 @@ public class StaticBoxesWord extends RelativeLayout implements  DynamicDocViewCo
     @Override
     public void setContents(String s) {
         try {
-//            clearButton.setClickable(true);
-//            confirmButton.setClickable(true);
-//
-//            clearButton.setOnClickListener(this);
-//            confirmButton.setOnClickListener(this);
-
-//            this.clearButton.setOnClickListener(x -> {
-//                for(int i = 0; i<boxesRecycler.getAdapter().getItemCount(); i++) {
-//                    WritableCharBoxView charBoxView = (WritableCharBoxView) boxesRecycler.getChildAt(i);
-//                    if (charBoxView != null) {
-//                        charBoxView.restart();
-//                    }
-//                }
-//            });
-//
-//            this.confirmButton.setOnClickListener(x -> {
-//                for(int i = 0; i<boxesRecycler.getAdapter().getItemCount(); i++) {
-//                    WritableCharBoxView charBoxView = (WritableCharBoxView) boxesRecycler.getChildAt(i);
-//                    if (charBoxView != null) {
-//                        charBoxView.restart();
-//                    }
-//                }
-//            });
-
             s = s.substring(1);
             String[] indexLength = s.split(" ");
             assert indexLength.length==2;
