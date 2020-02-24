@@ -74,6 +74,10 @@ public class CompileDocActivity extends AppCompatActivity {
 //                    adapterDoc.turnContent(DocCompilationModality.DEBUG);
 //                    mTextMessage.setText(R.string.title_notifications);
                     return true;
+                case R.id.save_doc:
+                    return true;
+                case R.id.delete_doc:
+                    return true;
             }
             return false;
         }

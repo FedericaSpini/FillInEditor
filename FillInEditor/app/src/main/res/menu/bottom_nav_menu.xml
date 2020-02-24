@@ -16,4 +16,14 @@
         android:icon="@drawable/ic_bug_report_black_24dp"
         android:title="debug" />
 
+    <item
+        android:id="@+id/save_doc"
+        android:icon="@drawable/ic_check_black_24dp"
+        android:title="continue" />
+
+    <item
+        android:id="@+id/delete_doc"
+        android:icon="@drawable/ic_clear_black_24dp"
+        android:title="cancel" />
+
 </menu>
