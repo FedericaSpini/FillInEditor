@@ -61,22 +61,18 @@ public class CompileDocActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.pen_mod:
                     turnContent(DocCompilationModality.PEN);
-//                    adapterDoc.turnContent(DocCompilationModality.PEN);
-//                    mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.graphometric_mod:
                     turnContent(DocCompilationModality.GRAPHOMETRIC);
-//                    adapterDoc.turnContent(DocCompilationModality.GRAPHOMETRIC);
-//                    mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.debug_mod:
                     turnContent(DocCompilationModality.DEBUG);
-//                    adapterDoc.turnContent(DocCompilationModality.DEBUG);
-//                    mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.save_doc:
+                    saveContent();
                     return true;
                 case R.id.delete_doc:
+                    deleteContent();
                     return true;
             }
             return false;
@@ -90,7 +86,24 @@ public class CompileDocActivity extends AppCompatActivity {
                 word.turnContent(mod);
             }
         }
+    }
 
+    public void deleteContent(){
+        for(int i = 0; i<recyclerView.getAdapter().getItemCount(); i++){
+            if (recyclerView.getAdapter().getItemViewType(i) == STATIC_BOXES_WORD_ID){
+                StaticBoxesWord word = (StaticBoxesWord) recyclerView.getChildAt(i);
+                word.deleteContent();
+            }
+        }
+    }
+
+    public void saveContent(){
+        for(int i = 0; i<recyclerView.getAdapter().getItemCount(); i++){
+            if (recyclerView.getAdapter().getItemViewType(i) == STATIC_BOXES_WORD_ID){
+                StaticBoxesWord word = (StaticBoxesWord) recyclerView.getChildAt(i);
+                word.saveContent();
+            }
+        }
     }
 
 }

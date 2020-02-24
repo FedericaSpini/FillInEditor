@@ -86,5 +86,23 @@ public class StaticBoxesWord extends RelativeLayout implements DynamicDocViewCom
         }
     }
 
+    public void deleteContent(){
+        for(int i = 0; i<boxesRecycler.getAdapter().getItemCount(); i++) {
+            WritableCharBoxView charBoxView = (WritableCharBoxView) boxesRecycler.getChildAt(i);
+            if (charBoxView != null) {
+                charBoxView.restart();
+            }
+        }
+    }
+
+    public void saveContent(){
+        for(int i = 0; i<boxesRecycler.getAdapter().getItemCount(); i++) {
+            WritableCharBoxView charBoxView = (WritableCharBoxView) boxesRecycler.getChildAt(i);
+            if (charBoxView != null) {
+//                charBoxView.turnContent(mod);
+            }
+        }
+    }
+
 
 }
