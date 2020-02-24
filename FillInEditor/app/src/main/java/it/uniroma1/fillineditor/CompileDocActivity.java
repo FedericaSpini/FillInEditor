@@ -59,21 +59,21 @@ public class CompileDocActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.pen_mod:
-                    turnContent(DocCompilationModality.PEN);
-                    return true;
-                case R.id.graphometric_mod:
-                    turnContent(DocCompilationModality.GRAPHOMETRIC);
-                    return true;
-                case R.id.debug_mod:
-                    turnContent(DocCompilationModality.DEBUG);
-                    return true;
+//                case R.id.pen_mod:
+//                    turnContent(DocCompilationModality.PEN);
+//                    return true;
+//                case R.id.graphometric_mod:
+//                    turnContent(DocCompilationModality.GRAPHOMETRIC);
+//                    return true;
+//                case R.id.debug_mod:
+//                    turnContent(DocCompilationModality.DEBUG);
+//                    return true;
                 case R.id.save_doc:
-                    saveContent();
+//                    saveContent();
                     return true;
-                case R.id.delete_doc:
-                    deleteContent();
-                    return true;
+//                case R.id.delete_doc:
+//                    deleteContent();
+//                    return true;
             }
             return false;
         }

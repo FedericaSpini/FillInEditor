@@ -6,7 +6,8 @@ android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:clickable="true"
 android:focusable="true"
-android:foreground="?android:attr/selectableItemBackground">
+android:foreground="?android:attr/selectableItemBackground"
+    android:backgroundTint="#b2dfdb">
     <include
         layout="@layout/recycler_char_boxes"
         android:id="@+id/boxes_recycler"
@@ -16,34 +17,46 @@ android:foreground="?android:attr/selectableItemBackground">
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelBarrier"/>
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/text_edited"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:layout_below="@+id/boxes_recycler"
         android:layout_alignParentLeft="true"
         android:hint="Enter text here"
+        android:background="#b2dfdb"
         ></EditText>
-    <Button
-        android:id="@+id/confirm_button"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:background="#b2dfdb"
+        app:labelVisibilityMode="labeled"
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/boxes_recycler"
-        android:layout_alignParentRight="true"
-        android:drawableTop="@drawable/ic_check_black_24dp"
-        android:textSize="10dp"
-        android:text="confirm"
-        android:backgroundTint="#69f0ae"
-        ></Button>
-    <Button
-        android:id="@+id/clear_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/boxes_recycler"
-        android:layout_toLeftOf="@+id/confirm_button"
-        android:drawableTop="@drawable/ic_clear_black_24dp"
-        android:textSize="10dp"
-        android:text="clear"
-        android:backgroundTint="#ff867f
-"
-        ></Button>
+        android:layout_below="@+id/text_edited"
+        app:menu="@menu/bottom_nav_word" />
+
+<!--    <Button-->
+<!--        android:id="@+id/confirm_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/boxes_recycler"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:drawableTop="@drawable/ic_check_black_24dp"-->
+<!--        android:textSize="10dp"-->
+<!--        android:text="confirm"-->
+<!--        android:backgroundTint="#69f0ae"-->
+<!--        ></Button>-->
+<!--    <Button-->
+<!--        android:id="@+id/clear_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/boxes_recycler"-->
+<!--        android:layout_toLeftOf="@+id/confirm_button"-->
+<!--        android:drawableTop="@drawable/ic_clear_black_24dp"-->
+<!--        android:textSize="10dp"-->
+<!--        android:text="clear"-->
+<!--        android:backgroundTint="#ff867f-->
+<!--"-->
+<!--        ></Button>-->
 </it.uniroma1.fillineditor.viewComponents.StaticBoxesWord>
