@@ -14,8 +14,6 @@ import java.io.Writer;
 
 public class JSONResReader {
 
-//public class JSONResourceReader {
-
     private String jsonString;
     private static final String LOGTAG = JSONResReader.class.getSimpleName();
 

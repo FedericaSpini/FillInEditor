@@ -59,31 +59,4 @@ public class CompileDocActivity extends AppCompatActivity {
         }
     };
 
-//    public void turnContent(DocCompilationModality mod){
-//        for(int i = 0; i<recyclerView.getAdapter().getItemCount(); i++){
-//            if (recyclerView.getAdapter().getItemViewType(i) == STATIC_BOXES_WORD_ID){
-//                StaticBoxesWord word = (StaticBoxesWord) recyclerView.getChildAt(i);
-//                word.turnContent(mod);
-//            }
-//        }
-//    }
-//
-//    public void deleteContent(){
-//        for(int i = 0; i<recyclerView.getAdapter().getItemCount(); i++){
-//            if (recyclerView.getAdapter().getItemViewType(i) == STATIC_BOXES_WORD_ID){
-//                StaticBoxesWord word = (StaticBoxesWord) recyclerView.getChildAt(i);
-//                word.deleteContent();
-//            }
-//        }
-//    }
-//
-//    public void saveContent(){
-//        for(int i = 0; i<recyclerView.getAdapter().getItemCount(); i++){
-//            if (recyclerView.getAdapter().getItemViewType(i) == STATIC_BOXES_WORD_ID){
-//                StaticBoxesWord word = (StaticBoxesWord) recyclerView.getChildAt(i);
-//                word.saveContent();
-//            }
-//        }
-//    }
-
 }

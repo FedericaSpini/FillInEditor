@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import java.io.InputStream;
-import java.util.Arrays;
 
 import it.uniroma1.fillineditor.io.JSONResReader;
 
@@ -23,7 +22,6 @@ public class ConfigurationReader
                         "raw", context.getPackageName()));
         JSONResReader reader = new JSONResReader(resources, ins);
         JSONViewObject[] configurationJson = reader.constructUsingGson(JSONViewObject[].class);
-        System.out.println("??????????????????????????4"+ Arrays.deepToString(configurationJson));
         return configurationJson;
     }
 

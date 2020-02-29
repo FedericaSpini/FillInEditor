@@ -55,9 +55,6 @@ public class DynamicDocModel implements Parcelable {
         this.encodedCompilableText=in.readString();
         this.JSONCompilableText = decodeFields();
         setContentsFromJson();
-
-
-//        this.contents = (DynamicDocContentModel[]) in.readArray(getClass().getClassLoader());
     }
 
     public static final Creator<DynamicDocModel> CREATOR = new Creator<DynamicDocModel>() {

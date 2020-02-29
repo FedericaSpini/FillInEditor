@@ -31,7 +31,7 @@ public class DocContentManager {
             case 1:
                 return defineDynamicText();
         }
-        throw new RuntimeException("ATTENZIONE! NUMERO DI COMPONENTE NON VALIDO");
+        throw new RuntimeException("Component number is not valid");
     }
 
     public StaticTextModel defineStaticText(){

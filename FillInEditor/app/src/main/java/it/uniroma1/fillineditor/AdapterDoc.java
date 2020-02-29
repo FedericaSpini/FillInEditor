@@ -33,15 +33,6 @@ public AdapterDoc(Context context, String[] config){
         }
     }
 
-//    public class ViewHolderDynamicText extends RecyclerView.ViewHolder {
-//        protected WritableCharBoxView charBox;
-//
-//        public ViewHolderDynamicText(WritableCharBoxView v) {
-//            super(v);
-//            charBox = v;
-//        }
-//    }
-
     public class ViewHolderStaticBoxesWord extends RecyclerView.ViewHolder{
         StaticBoxesWord word;
         public ViewHolderStaticBoxesWord(View v){
@@ -63,7 +54,7 @@ public AdapterDoc(Context context, String[] config){
                         inflate(R.layout.sample_static_boxes_word, parent, false);
                 return new ViewHolderStaticBoxesWord(staticBoxesWord);
         }
-        throw new RuntimeException("ATTENZIONE! NUMERO DI COMPONENTE NON VALIDO");
+        throw new RuntimeException("Component number is not valid");
     }
 
     @Override

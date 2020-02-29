@@ -186,9 +186,8 @@ public class WritableCharBoxView extends View {
         float x = event.getRawX();
         float relative_x = x - boxLocation[0];
         float y = event.getRawY() - boxLocation[1];
-//        System.out.println(boxLocation[0] + ", " + boxLocation[1] + "\n");
         if (relative_x>=0 && relative_x<=getWidth() && y>=0 && y<=getHeight()+ (RADIUS_CURSOR/2)){
-            System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f", x, relative_x,  y));
+//            System.out.println(String.format("\n Le x sono: %f, %f \n le y sono %f", x, relative_x,  y));
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     is_only_down = true;
@@ -281,8 +280,7 @@ public class WritableCharBoxView extends View {
         saveUpEvent(chrono.getElapsedTime(), component_count, mX, mY);
 
         cursorPath.rewind();
-        //TODO capisci quale è il senso delle prossime 8 righe
-        // commit the path to our offscreen
+
         privateCanvas.drawPath(linePath, linePaint);
         privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
         privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
@@ -400,15 +398,12 @@ public class WritableCharBoxView extends View {
         invalidate();
 //        switch (mod) {
 //            case PEN:
-//                        System.out.println("PEEEEEEEEEEEEEEEEEEEEN   ");
 //                        resetPath();
 //                break;
 //            case DEBUG:
-//                        System.out.println("DEBUG!  " );
 //                        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
 //                break;
 //            case GRAPHOMETRIC:
-//                        System.out.println("GRAFOMETRIA PORTAMI VIA  ");
 //                        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGrayCyan));
 //                break;
 //        }
@@ -417,42 +412,5 @@ public class WritableCharBoxView extends View {
 
     public DocCompilationModality getModality() {return modality;}
 
-    public void setModality(DocCompilationModality modality) {
-        this.modality = modality;
-//        privateBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-//        privateCanvas = new Canvas(privateBitmap);
-//        privateCanvas.translate(-getLeft(), -getTop());
-//        privateCanvas.drawPath(linePath, linePaint);
-//        initScreen();
-//        switch (modality){
-//            case GRAPHOMETRIC:
-//                privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
-//                privateCanvas.drawPath(touchUpCirclePath, sampleUpPaint);
-//                privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
-//                break;
-//            case DEBUG:
-//                privateCanvas.drawPath(touchDownCirclePath, sampleDownPaint);
-//                privateCanvas.drawPath(touchUpCirclePath, sampleUpPaint);
-//                privateCanvas.drawPath(touchMoveCirclePath, sampleMovePaint);
-//                privateCanvas.drawPath(sampledCirclePath, sampledCirclePaint);
-//                break;
-//            case PEN:
-//                break;
-//        }
-//        if (modality==DocCompilationModality.PEN){
-//            if (sampleDownPaint!=null && touchDownCirclePath!=null && privateCanvas!=null) {
-////                privateBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-////                privateCanvas = new Canvas(privateBitmap);
-////                privateCanvas.translate(-getLeft(), -getTop());
-////                privateCanvas.drawPath(linePath, linePaint);
-//            }
-//        }
-//        else{
-//            sampleDownPaint.setColor(Color.GREEN);
-//            invalidate();
-//        }
-    }
-
-
-
+    public void setModality(DocCompilationModality modality) { this.modality = modality; }
 }
