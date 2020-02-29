@@ -1,6 +1,6 @@
 [{
   "id": 0,
-  "title": "Compilazione Modulo",
+  "title": "Module",
   "text": "Name: Surname: Born in: Mail: Telephone:",
   "fields": [[5,11],[14,11],[23, 11],[29,11],[39,11], [39,11]]
   },
@@ -12,8 +12,8 @@
   },
   {
     "id": 2,
-    "title": "Documento 3",
-    "text": "Nome: Cognome: Residente in: ",
-    "fields": [[6,16],[15, 10],[29, 20]]
+    "title": "Simple Module",
+    "text": "Name: Surname: Born in: ",
+    "fields": [[6,10],[15, 6],[24, 13]]
   }
 ]
